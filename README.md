@@ -163,8 +163,8 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 👥 Authors
 
-- Developer Name
-- Contact: your.email@example.com
+- Mohammed hafeez
+- Contact: mohamedhafeez.dev@gmail.com
 
 ## 🙏 Acknowledgments
 
