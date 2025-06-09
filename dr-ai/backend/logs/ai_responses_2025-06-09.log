@@ -834,3 +834,5 @@ DIAGNOSIS: Emma Wilson has severe asthma with poor control despite current treat
 2025-06-09 19:57:09,772 - ollama_client - DEBUG - Raw response:
 DIAGNOSIS: Emma Wilson has severe asthma with poor control despite current treatment. Her history of hypertension and tonsillectomy also need to be considered in her management plan. We recommend a more comprehensive treatment plan, including an asthma action plan, regular follow-ups, and possibly adding new medications or adjusting existing ones. (Medical Record)
 2025-06-09 19:57:09,772 - ollama_client - INFO - Successfully generated and parsed AI response
+2025-06-09 19:59:40,926 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 20:02:39,567 - ollama_client - INFO - Initialized Ollama client with model: medllama2
