@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8000/api';
+const API_BASE_URL = 'https://rj8vq174-8000.uks1.devtunnels.ms/api';
 
 // Create axios instance with default config
 const axiosInstance = axios.create({
@@ -40,7 +40,7 @@ export const auth = {
 };
 
 // Medical Records API
-const API_URL = 'http://localhost:8000/api';
+const API_URL = 'https://rj8vq174-8000.uks1.devtunnels.ms/api';
 
 export const medicalRecords = {
     getMedicalRecord: async () => {

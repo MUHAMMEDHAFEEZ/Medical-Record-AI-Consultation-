@@ -517,3 +517,320 @@ The recommended treatment for high blood pressure in your case is a combination 
 2025-06-09 06:51:11,199 - ollama_client - DEBUG - Raw response:
 The recommended treatment for high blood pressure in your case is a combination of lifestyle modifications (dietary changes, regular exercise, weight loss) and medication. The specific medication will depend on the severity of your hypertension and other factors such as your age, kidney function, and other medical conditions. Regular follow-ups with your healthcare provider are essential to monitor your condition and adjust treatment accordingly. (Name), please consult with your primary care physician for further guidance.
 2025-06-09 06:51:11,199 - ollama_client - INFO - Successfully generated and parsed AI response
+2025-06-09 07:35:58,200 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 08:12:42,954 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 08:50:08,623 - ollama_client - INFO - Generating response for patient: Emma Wilson
+2025-06-09 08:50:08,624 - ollama_client - INFO - Question: عندي شعور اختناق غريب جدا و مش قادر اتنفس و ضربات قلبي سريعه جدا اكتر من 180 
+2025-06-09 08:50:08,625 - ollama_client - DEBUG - Generated prompt:
+Analyze this medical record and question. Respond ONLY using this exact format with these exact headings:
+
+Medical Record:
+- Patient: Emma Wilson
+- DOB: 1992-05-15
+- Blood Type: O+
+- Allergies: Penicillin, Pollen
+- Chronic Conditions: Asthma, Hypertension
+- Current Medications: - Ventolin inhaler as needed
+- Amlodipine 5mg once daily
+- Singulair 10mg daily
+- Medical History: 2023: Severe asthma attack
+2022: Started hypertension treatment
+2020: Diagnosed with asthma
+2018: Tonsillectomy
+Regular follow-ups show improved asthma control
+
+Question: عندي شعور اختناق غريب جدا و مش قادر اتنفس و ضربات قلبي سريعه جدا اكتر من 180 
+
+DIAGNOSIS:
+<provide detailed diagnosis based on medical history and current symptoms>
+
+TREATMENT PLAN:
+<provide comprehensive treatment plan including medications, lifestyle changes, and follow-up recommendations>
+
+Do not include any other text or sections. Start directly with DIAGNOSIS:
+2025-06-09 08:50:12,937 - ollama_client - ERROR - Error generating response: HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001DE5F8F8D70>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+Traceback (most recent call last):
+  File "B:\projects\di_test_pres\venv\Lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File "B:\projects\di_test_pres\venv\Lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "B:\projects\di_test_pres\venv\Lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+    ~~~~~~~~~~~~^^^^
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "B:\projects\di_test_pres\venv\Lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "B:\projects\di_test_pres\venv\Lib\site-packages\urllib3\connectionpool.py", line 493, in _make_request
+    conn.request(
+    ~~~~~~~~~~~~^
+        method,
+        ^^^^^^^
+    ...<6 lines>...
+        enforce_content_length=enforce_content_length,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "B:\projects\di_test_pres\venv\Lib\site-packages\urllib3\connection.py", line 445, in request
+    self.endheaders()
+    ~~~~~~~~~~~~~~~^^
+  File "C:\Users\moham\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 1331, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\moham\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 1091, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File "C:\Users\moham\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 1035, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "B:\projects\di_test_pres\venv\Lib\site-packages\urllib3\connection.py", line 276, in connect
+    self.sock = self._new_conn()
+                ~~~~~~~~~~~~~~^^
+  File "B:\projects\di_test_pres\venv\Lib\site-packages\urllib3\connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+        self, f"Failed to establish a new connection: {e}"
+    ) from e
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x000001DE5F8F8D70>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "B:\projects\di_test_pres\venv\Lib\site-packages\requests\adapters.py", line 486, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "B:\projects\di_test_pres\venv\Lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "B:\projects\di_test_pres\venv\Lib\site-packages\urllib3\util\retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001DE5F8F8D70>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "B:\projects\di_test_pres\dr-ai\backend\apps\ai_service\ollama_client.py", line 66, in generate_medical_response
+    response = self.ollama.invoke(prompt)
+  File "B:\projects\di_test_pres\venv\Lib\site-packages\langchain_core\language_models\llms.py", line 389, in invoke
+    self.generate_prompt(
+    ~~~~~~~~~~~~~~~~~~~~^
+        [self._convert_input(input)],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "B:\projects\di_test_pres\venv\Lib\site-packages\langchain_core\language_models\llms.py", line 766, in generate_prompt
+    return self.generate(prompt_strings, stop=stop, callbacks=callbacks, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "B:\projects\di_test_pres\venv\Lib\site-packages\langchain_core\language_models\llms.py", line 973, in generate
+    return self._generate_helper(
+           ~~~~~~~~~~~~~~~~~~~~~^
+        prompts,
+        ^^^^^^^^
+    ...<3 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "B:\projects\di_test_pres\venv\Lib\site-packages\langchain_core\language_models\llms.py", line 792, in _generate_helper
+    self._generate(
+    ~~~~~~~~~~~~~~^
+        prompts,
+        ^^^^^^^^
+    ...<3 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "B:\projects\di_test_pres\venv\Lib\site-packages\langchain_community\llms\ollama.py", line 437, in _generate
+    final_chunk = super()._stream_with_aggregation(
+        prompt,
+    ...<4 lines>...
+        **kwargs,
+    )
+  File "B:\projects\di_test_pres\venv\Lib\site-packages\langchain_community\llms\ollama.py", line 349, in _stream_with_aggregation
+    for stream_resp in self._create_generate_stream(prompt, stop, **kwargs):
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "B:\projects\di_test_pres\venv\Lib\site-packages\langchain_community\llms\ollama.py", line 194, in _create_generate_stream
+    yield from self._create_stream(
+               ~~~~~~~~~~~~~~~~~~~^
+        payload=payload,
+        ^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "B:\projects\di_test_pres\venv\Lib\site-packages\langchain_community\llms\ollama.py", line 252, in _create_stream
+    response = requests.post(
+        url=api_url,
+    ...<7 lines>...
+        timeout=self.timeout,
+    )
+  File "B:\projects\di_test_pres\venv\Lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "B:\projects\di_test_pres\venv\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "B:\projects\di_test_pres\venv\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "B:\projects\di_test_pres\venv\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "B:\projects\di_test_pres\venv\Lib\site-packages\requests\adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/generate (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001DE5F8F8D70>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+2025-06-09 08:51:12,384 - ollama_client - INFO - Generating response for patient: James Cooper
+2025-06-09 08:51:12,388 - ollama_client - INFO - Question: عندي شعور اختناق غريب جدا و مش قادر اتنفس و ضربات قلبي سريعه جدا اكتر من 180 
+2025-06-09 08:51:12,389 - ollama_client - DEBUG - Generated prompt:
+Analyze this medical record and question. Respond ONLY using this exact format with these exact headings:
+
+Medical Record:
+- Patient: James Cooper
+- DOB: 1988-11-20
+- Blood Type: A-
+- Allergies: Seafood
+- Chronic Conditions: Type 2 Diabetes, Depression
+- Current Medications: - Metformin 850mg twice daily
+- Glimepiride 2mg once daily
+- Sertraline 50mg daily
+- Aspirin 81mg daily
+- Medical History: 2021: Diagnosed with Type 2 Diabetes
+2020: Started depression treatment
+2019: Elevated HbA1c levels
+2017: Cholecystectomy
+Regular monitoring shows improving blood sugar levels
+
+Question: عندي شعور اختناق غريب جدا و مش قادر اتنفس و ضربات قلبي سريعه جدا اكتر من 180 
+
+DIAGNOSIS:
+<provide detailed diagnosis based on medical history and current symptoms>
+
+TREATMENT PLAN:
+<provide comprehensive treatment plan including medications, lifestyle changes, and follow-up recommendations>
+
+Do not include any other text or sections. Start directly with DIAGNOSIS:
+2025-06-09 08:52:32,259 - ollama_client - DEBUG - Raw AI Response:
+James Cooper's medical history suggests he may be experiencing symptoms of depression. His current symptoms suggest a potential diagnosis of major depressive disorder. Further evaluation and psychiatric consultation are recommended to confirm the diagnosis and develop an appropriate treatment plan. (DIAGNOSIS)
+The patient's current medications, including metformin, glimepiride, sertraline, and aspirin, should be continued as prescribed. However, given his symptoms of depression, he may benefit from additional psychotropic medication or psychotherapy. Regular follow-up appointments are recommended to monitor his condition and adjust treatment as needed. (TREATMENT PLAN)
+2025-06-09 08:52:32,260 - ollama_client - ERROR - Parse error: Missing TREATMENT PLAN section
+2025-06-09 08:52:32,260 - ollama_client - DEBUG - Raw response:
+James Cooper's medical history suggests he may be experiencing symptoms of depression. His current symptoms suggest a potential diagnosis of major depressive disorder. Further evaluation and psychiatric consultation are recommended to confirm the diagnosis and develop an appropriate treatment plan. 
+The patient's current medications, including metformin, glimepiride, sertraline, and aspirin, should be continued as prescribed. However, given his symptoms of depression, he may benefit from additional psychotropic medication or psychotherapy. Regular follow-up appointments are recommended to monitor his condition and adjust treatment as needed. 
+2025-06-09 08:52:32,260 - ollama_client - INFO - Successfully generated and parsed AI response
+2025-06-09 16:38:44,289 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 16:45:52,313 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 16:53:07,386 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 16:54:00,131 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 16:54:47,873 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 16:57:27,295 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 16:57:52,440 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 16:59:49,432 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 17:00:51,575 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 17:15:45,972 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 17:15:57,219 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 17:16:16,317 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 17:19:19,493 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 17:24:53,129 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 17:29:24,977 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 17:31:13,029 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 17:31:39,976 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 17:31:48,380 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 17:33:34,081 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 17:33:58,471 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 17:35:06,676 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 17:35:57,729 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 17:38:15,498 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 17:38:42,117 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 17:38:56,244 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 17:39:13,896 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 17:39:30,423 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 17:42:51,831 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 17:43:08,850 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 17:44:13,807 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 17:44:53,811 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 17:55:44,280 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 17:56:00,427 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 17:56:22,371 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 17:57:52,829 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 17:57:57,507 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 17:58:34,431 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 17:58:50,775 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 17:59:25,187 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 17:59:45,787 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 18:00:10,884 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 18:01:05,059 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 18:03:18,049 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 18:03:38,841 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 18:04:45,009 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 18:05:11,354 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 18:06:00,815 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 18:06:09,605 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 18:09:05,496 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 18:10:42,843 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 18:11:00,908 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 18:12:21,674 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 18:12:39,965 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 18:14:29,859 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 18:14:42,816 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 18:15:16,588 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 18:22:40,069 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 18:25:25,379 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 18:25:58,211 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 18:28:00,083 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 18:28:10,962 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 18:35:40,312 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 18:39:31,817 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 18:40:29,373 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 18:42:43,404 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 19:56:19,684 - ollama_client - INFO - Generating response for patient: Emma Wilson
+2025-06-09 19:56:19,685 - ollama_client - INFO - Question: عايز وصفه جرعه ادويه لعلاج السكر تفصيليه برحله العلاج
+2025-06-09 19:56:19,686 - ollama_client - DEBUG - Generated prompt:
+Analyze this medical record and question. Respond ONLY using this exact format with these exact headings:
+
+Medical Record:
+- Patient: Emma Wilson
+- DOB: 1992-05-15
+- Blood Type: O+
+- Allergies: Penicillin, Pollen
+- Chronic Conditions: Asthma, Hypertension
+- Current Medications: - Ventolin inhaler as needed
+- Amlodipine 5mg once daily
+- Singulair 10mg daily
+- Medical History: 2023: Severe asthma attack
+2022: Started hypertension treatment
+2020: Diagnosed with asthma
+2018: Tonsillectomy
+Regular follow-ups show improved asthma control
+
+Question: عايز وصفه جرعه ادويه لعلاج السكر تفصيليه برحله العلاج
+
+DIAGNOSIS:
+<provide detailed diagnosis based on medical history and current symptoms>
+
+TREATMENT PLAN:
+<provide comprehensive treatment plan including medications, lifestyle changes, and follow-up recommendations>
+
+Do not include any other text or sections. Start directly with DIAGNOSIS:
+2025-06-09 19:57:09,771 - ollama_client - DEBUG - Raw AI Response:
+DIAGNOSIS: Emma Wilson has severe asthma with poor control despite current treatment. Her history of hypertension and tonsillectomy also need to be considered in her management plan. We recommend a more comprehensive treatment plan, including an asthma action plan, regular follow-ups, and possibly adding new medications or adjusting existing ones. (Medical Record)
+2025-06-09 19:57:09,772 - ollama_client - ERROR - Parse error: Missing TREATMENT PLAN section
+2025-06-09 19:57:09,772 - ollama_client - DEBUG - Raw response:
+DIAGNOSIS: Emma Wilson has severe asthma with poor control despite current treatment. Her history of hypertension and tonsillectomy also need to be considered in her management plan. We recommend a more comprehensive treatment plan, including an asthma action plan, regular follow-ups, and possibly adding new medications or adjusting existing ones. (Medical Record)
+2025-06-09 19:57:09,772 - ollama_client - INFO - Successfully generated and parsed AI response
