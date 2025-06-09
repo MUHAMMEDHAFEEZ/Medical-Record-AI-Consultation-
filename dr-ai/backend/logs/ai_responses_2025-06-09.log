@@ -1,0 +1,519 @@
+2025-06-09 03:02:52,317 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 03:02:52,318 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 03:02:52,964 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 03:04:22,917 - ollama_client - INFO - Generating response for patient: Ahmed Mohamed
+2025-06-09 03:04:22,918 - ollama_client - INFO - Question: Given my history of Type 2 Diabetes and Hypertension, what is my current health status and what preventive measures should I take? Please include blood sugar management, blood pressure control, and any lifestyle modifications needed
+2025-06-09 03:04:22,921 - ollama_client - DEBUG - Generated prompt:
+You are an experienced medical professional. Please analyze the following medical record and question.
+
+Medical Record:
+- Patient: Ahmed Mohamed
+- DOB: 1985-03-15
+- Blood Type: A+
+- Allergies: Penicillin, Dust
+- Chronic Conditions: Type 2 Diabetes, Hypertension
+- Current Medications: - Metformin 500mg twice daily
+- Lisinopril 10mg once daily
+- Aspirin 81mg once daily
+- Medical History: 2020: Diagnosed with Type 2 Diabetes
+2018: Hypertension diagnosis
+2015: Appendectomy
+2010: Fractured right ankle
+Regular checkups show stable blood pressure and improving blood sugar levels.
+
+Question: Given my history of Type 2 Diabetes and Hypertension, what is my current health status and what preventive measures should I take? Please include blood sugar management, blood pressure control, and any lifestyle modifications needed
+
+You must respond using exactly this format:
+
+DIAGNOSIS:
+[Write a detailed diagnosis considering the patient's medical history and current symptoms]
+
+TREATMENT PLAN:
+[Provide a comprehensive treatment plan including medications, lifestyle changes, and follow-up recommendations]
+
+Important: Your response must include exactly these two sections with these exact headings. Write clearly and professionally in simple English.
+2025-06-09 03:07:14,018 - ollama_client - INFO - Generating response for patient: Ahmed Mohamed
+2025-06-09 03:07:14,020 - ollama_client - INFO - Question: Given my history of Type 2 Diabetes and Hypertension, what is my current health status and what preventive measures should I take? Please include blood sugar management, blood pressure control, and any lifestyle modifications needed
+2025-06-09 03:07:14,021 - ollama_client - DEBUG - Generated prompt:
+You are an experienced medical professional. Please analyze the following medical record and question.
+
+Medical Record:
+- Patient: Ahmed Mohamed
+- DOB: 1985-03-15
+- Blood Type: A+
+- Allergies: Penicillin, Dust
+- Chronic Conditions: Type 2 Diabetes, Hypertension
+- Current Medications: - Metformin 500mg twice daily
+- Lisinopril 10mg once daily
+- Aspirin 81mg once daily
+- Medical History: 2020: Diagnosed with Type 2 Diabetes
+2018: Hypertension diagnosis
+2015: Appendectomy
+2010: Fractured right ankle
+Regular checkups show stable blood pressure and improving blood sugar levels.
+
+Question: Given my history of Type 2 Diabetes and Hypertension, what is my current health status and what preventive measures should I take? Please include blood sugar management, blood pressure control, and any lifestyle modifications needed
+
+You must respond using exactly this format:
+
+DIAGNOSIS:
+[Write a detailed diagnosis considering the patient's medical history and current symptoms]
+
+TREATMENT PLAN:
+[Provide a comprehensive treatment plan including medications, lifestyle changes, and follow-up recommendations]
+
+Important: Your response must include exactly these two sections with these exact headings. Write clearly and professionally in simple English.
+2025-06-09 03:08:14,555 - ollama_client - DEBUG - Raw AI Response:
+Thank you for your question. We will analyze the patient's medical history and current symptoms to determine their health status. Please give us a few minutes to review the case.
+2025-06-09 03:08:14,556 - ollama_client - DEBUG - Parsing response:
+Thank you for your question. We will analyze the patient's medical history and current symptoms to determine their health status. Please give us a few minutes to review the case.
+2025-06-09 03:08:14,556 - ollama_client - ERROR - Invalid sections count: 1
+2025-06-09 03:08:14,556 - ollama_client - ERROR - Parse error: Missing TREATMENT PLAN section
+2025-06-09 03:08:14,556 - ollama_client - ERROR - Raw response:
+Thank you for your question. We will analyze the patient's medical history and current symptoms to determine their health status. Please give us a few minutes to review the case.
+2025-06-09 03:08:14,556 - ollama_client - INFO - Successfully generated and parsed AI response
+2025-06-09 03:09:17,430 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 03:09:25,262 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 03:09:29,392 - ollama_client - INFO - Generating response for patient: Ahmed Mohamed
+2025-06-09 03:09:29,393 - ollama_client - INFO - Question: Given my history of Type 2 Diabetes and Hypertension, what is my current health status and what preventive measures should I take? Please include blood sugar management, blood pressure control, and any lifestyle modifications needed
+2025-06-09 03:09:29,393 - ollama_client - DEBUG - Generated prompt:
+Analyze this medical record and question. Respond ONLY using this exact format with these exact headings:
+
+Medical Record:
+- Patient: Ahmed Mohamed
+- DOB: 1985-03-15
+- Blood Type: A+
+- Allergies: Penicillin, Dust
+- Chronic Conditions: Type 2 Diabetes, Hypertension
+- Current Medications: - Metformin 500mg twice daily
+- Lisinopril 10mg once daily
+- Aspirin 81mg once daily
+- Medical History: 2020: Diagnosed with Type 2 Diabetes
+2018: Hypertension diagnosis
+2015: Appendectomy
+2010: Fractured right ankle
+Regular checkups show stable blood pressure and improving blood sugar levels.
+
+Question: Given my history of Type 2 Diabetes and Hypertension, what is my current health status and what preventive measures should I take? Please include blood sugar management, blood pressure control, and any lifestyle modifications needed
+
+DIAGNOSIS:
+<provide detailed diagnosis based on medical history and current symptoms>
+
+TREATMENT PLAN:
+<provide comprehensive treatment plan including medications, lifestyle changes, and follow-up recommendations>
+
+Do not include any other text or sections. Start directly with DIAGNOSIS:
+2025-06-09 03:14:10,336 - ollama_client - DEBUG - Raw AI Response:
+Ahmed's current health status is stable for his Type 2 Diabetes and Hypertension. However, he should continue to monitor his blood sugar levels regularly and maintain a healthy diet and exercise routine. He should also adhere to his medication regimen and schedule follow-up appointments with his primary care physician. (DIAGNOSIS)
+Ahmed should continue to manage his Type 2 Diabetes by following a healthy diet, exercising regularly, and monitoring his blood sugar levels. He should also adhere to his medication regimen for hypertension. Regular check-ups with his primary care physician are recommended to monitor his condition and adjust treatment as needed. (TREATMENT PLAN)
+2025-06-09 03:14:10,336 - ollama_client - DEBUG - Parsing response:
+Ahmed's current health status is stable for his Type 2 Diabetes and Hypertension. However, he should continue to monitor his blood sugar levels regularly and maintain a healthy diet and exercise routine. He should also adhere to his medication regimen and schedule follow-up appointments with his primary care physician. (DIAGNOSIS)
+Ahmed should continue to manage his Type 2 Diabetes by following a healthy diet, exercising regularly, and monitoring his blood sugar levels. He should also adhere to his medication regimen for hypertension. Regular check-ups with his primary care physician are recommended to monitor his condition and adjust treatment as needed. (TREATMENT PLAN)
+2025-06-09 03:14:10,336 - ollama_client - ERROR - Invalid sections count: 1
+2025-06-09 03:14:10,337 - ollama_client - ERROR - Parse error: Missing TREATMENT PLAN section
+2025-06-09 03:14:10,337 - ollama_client - ERROR - Raw response:
+Ahmed's current health status is stable for his Type 2 Diabetes and Hypertension. However, he should continue to monitor his blood sugar levels regularly and maintain a healthy diet and exercise routine. He should also adhere to his medication regimen and schedule follow-up appointments with his primary care physician. (DIAGNOSIS)
+Ahmed should continue to manage his Type 2 Diabetes by following a healthy diet, exercising regularly, and monitoring his blood sugar levels. He should also adhere to his medication regimen for hypertension. Regular check-ups with his primary care physician are recommended to monitor his condition and adjust treatment as needed. (TREATMENT PLAN)
+2025-06-09 03:14:10,337 - ollama_client - INFO - Successfully generated and parsed AI response
+2025-06-09 03:17:06,996 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 03:17:14,149 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 03:19:08,800 - ollama_client - INFO - Generating response for patient: Ahmed Mohamed
+2025-06-09 03:19:08,801 - ollama_client - INFO - Question: Given my history of Type 2 Diabetes and Hypertension, what is my current health status and what preventive measures should I take? Please include blood sugar management, blood pressure control, and any lifestyle modifications needed
+2025-06-09 03:19:08,801 - ollama_client - DEBUG - Generated prompt:
+Analyze this medical record and question. Respond ONLY using this exact format with these exact headings:
+
+Medical Record:
+- Patient: Ahmed Mohamed
+- DOB: 1985-03-15
+- Blood Type: A+
+- Allergies: Penicillin, Dust
+- Chronic Conditions: Type 2 Diabetes, Hypertension
+- Current Medications: - Metformin 500mg twice daily
+- Lisinopril 10mg once daily
+- Aspirin 81mg once daily
+- Medical History: 2020: Diagnosed with Type 2 Diabetes
+2018: Hypertension diagnosis
+2015: Appendectomy
+2010: Fractured right ankle
+Regular checkups show stable blood pressure and improving blood sugar levels.
+
+Question: Given my history of Type 2 Diabetes and Hypertension, what is my current health status and what preventive measures should I take? Please include blood sugar management, blood pressure control, and any lifestyle modifications needed
+
+DIAGNOSIS:
+<provide detailed diagnosis based on medical history and current symptoms>
+
+TREATMENT PLAN:
+<provide comprehensive treatment plan including medications, lifestyle changes, and follow-up recommendations>
+
+Do not include any other text or sections. Start directly with DIAGNOSIS:
+2025-06-09 03:20:21,814 - ollama_client - DEBUG - Raw AI Response:
+Ahmed's current health status is stable for his Type 2 Diabetes and Hypertension. However, he should continue to monitor his blood sugar levels regularly and maintain a healthy diet and exercise routine. He should also ensure regular follow-up appointments with his primary care physician to monitor his condition and adjust medications as needed. (For example, metformin dose may need to be adjusted based on current blood sugar levels). Additionally, he should continue to take his hypertension medication regularly and maintain a healthy lifestyle to control his blood pressure. Regular check-ups will help monitor his condition and make any necessary changes to his treatment plan.
+2025-06-09 03:20:21,814 - ollama_client - ERROR - Parse error: Missing TREATMENT PLAN section
+2025-06-09 03:20:21,814 - ollama_client - DEBUG - Raw response:
+Ahmed's current health status is stable for his Type 2 Diabetes and Hypertension. However, he should continue to monitor his blood sugar levels regularly and maintain a healthy diet and exercise routine. He should also ensure regular follow-up appointments with his primary care physician to monitor his condition and adjust medications as needed. (For example, metformin dose may need to be adjusted based on current blood sugar levels). Additionally, he should continue to take his hypertension medication regularly and maintain a healthy lifestyle to control his blood pressure. Regular check-ups will help monitor his condition and make any necessary changes to his treatment plan.
+2025-06-09 03:20:21,815 - ollama_client - INFO - Successfully generated and parsed AI response
+2025-06-09 04:04:43,154 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 04:09:17,296 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 04:09:47,442 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 04:10:04,860 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 04:10:24,985 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 04:10:41,122 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 04:10:51,222 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 04:11:14,731 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 04:15:04,576 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 04:15:16,482 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 04:15:54,052 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 04:16:03,498 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 04:16:12,434 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 04:16:19,270 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 04:19:19,926 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 04:19:31,817 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 04:19:39,428 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 04:19:46,726 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 04:19:57,200 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 04:20:06,468 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 04:20:11,493 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 04:21:42,038 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 04:21:51,689 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 04:22:00,288 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 04:22:44,270 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 04:25:03,480 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 04:25:29,631 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 04:25:39,289 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 04:40:43,134 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 04:40:53,624 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 04:40:58,498 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 04:41:05,138 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 04:45:18,292 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 04:45:26,178 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 04:45:41,432 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 04:45:46,241 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 04:46:21,337 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 05:03:33,600 - ollama_client - INFO - Generating response for patient: Omar Khaled
+2025-06-09 05:03:33,601 - ollama_client - INFO - Question: Given my history of Type 2 Diabetes and Hypertension, what is my current health status and what preventive measures should I take? Please include blood sugar management, blood pressure control, and any lifestyle modifications needed
+2025-06-09 05:03:33,602 - ollama_client - DEBUG - Generated prompt:
+Analyze this medical record and question. Respond ONLY using this exact format with these exact headings:
+
+Medical Record:
+- Patient: Omar Khaled
+- DOB: 1975-11-30
+- Blood Type: B+
+- Allergies: None
+- Chronic Conditions: Rheumatoid Arthritis, Osteoporosis
+- Current Medications: - Methotrexate 15mg weekly
+- Folic acid 1mg daily
+- Prednisone 5mg daily
+- Alendronate 70mg weekly
+- Calcium + Vitamin D supplement daily
+- Medical History: 2022: Started osteoporosis treatment
+2019: Rheumatoid arthritis diagnosis
+2018: Total knee replacement (right)
+2016: Carpal tunnel surgery
+Regular rheumatology follow-ups show disease under control.
+
+Question: Given my history of Type 2 Diabetes and Hypertension, what is my current health status and what preventive measures should I take? Please include blood sugar management, blood pressure control, and any lifestyle modifications needed
+
+DIAGNOSIS:
+<provide detailed diagnosis based on medical history and current symptoms>
+
+TREATMENT PLAN:
+<provide comprehensive treatment plan including medications, lifestyle changes, and follow-up recommendations>
+
+Do not include any other text or sections. Start directly with DIAGNOSIS:
+2025-06-09 05:04:37,879 - ollama_client - DEBUG - Raw AI Response:
+Given your history of Type 2 Diabetes and Hypertension, you are at a higher risk for cardiovascular disease. Your current health status is stable under control. You should continue to manage your blood sugar levels through diet, exercise, and medication as needed. Blood pressure control is also crucial, and lifestyle modifications such as regular physical activity, weight management, and stress reduction techniques are recommended. Regular follow-ups with your primary care physician or endocrinologist will help monitor your condition and make any necessary adjustments to your treatment plan. (Medical Record)
+2025-06-09 05:04:37,879 - ollama_client - ERROR - Parse error: Missing TREATMENT PLAN section
+2025-06-09 05:04:37,879 - ollama_client - DEBUG - Raw response:
+Given your history of Type 2 Diabetes and Hypertension, you are at a higher risk for cardiovascular disease. Your current health status is stable under control. You should continue to manage your blood sugar levels through diet, exercise, and medication as needed. Blood pressure control is also crucial, and lifestyle modifications such as regular physical activity, weight management, and stress reduction techniques are recommended. Regular follow-ups with your primary care physician or endocrinologist will help monitor your condition and make any necessary adjustments to your treatment plan. (Medical Record)
+2025-06-09 05:04:37,879 - ollama_client - INFO - Successfully generated and parsed AI response
+2025-06-09 05:45:16,239 - ollama_client - INFO - Generating response for patient: James Cooper
+2025-06-09 05:45:16,240 - ollama_client - INFO - Question: عندي سخونيه شديده و محتاج اعرف اخد ادويه ايه عشان متعبش 
+2025-06-09 05:45:16,241 - ollama_client - DEBUG - Generated prompt:
+Analyze this medical record and question. Respond ONLY using this exact format with these exact headings:
+
+Medical Record:
+- Patient: James Cooper
+- DOB: 1988-11-20
+- Blood Type: A-
+- Allergies: Seafood
+- Chronic Conditions: Type 2 Diabetes, Depression
+- Current Medications: - Metformin 850mg twice daily
+- Glimepiride 2mg once daily
+- Sertraline 50mg daily
+- Aspirin 81mg daily
+- Medical History: 2021: Diagnosed with Type 2 Diabetes
+2020: Started depression treatment
+2019: Elevated HbA1c levels
+2017: Cholecystectomy
+Regular monitoring shows improving blood sugar levels
+
+Question: عندي سخونيه شديده و محتاج اعرف اخد ادويه ايه عشان متعبش 
+
+DIAGNOSIS:
+<provide detailed diagnosis based on medical history and current symptoms>
+
+TREATMENT PLAN:
+<provide comprehensive treatment plan including medications, lifestyle changes, and follow-up recommendations>
+
+Do not include any other text or sections. Start directly with DIAGNOSIS:
+2025-06-09 05:48:13,410 - ollama_client - DEBUG - Raw AI Response:
+The patient's medical history suggests a diagnosis of Type 2 Diabetes and Depression. The current symptoms suggest that the depression is severe. Treatment plan should include medications for both conditions, lifestyle changes to manage blood sugar levels, and regular follow-up appointments with a mental health professional. (Medical Record)
+2025-06-09 05:48:13,412 - ollama_client - ERROR - Parse error: Missing TREATMENT PLAN section
+2025-06-09 05:48:13,412 - ollama_client - DEBUG - Raw response:
+The patient's medical history suggests a diagnosis of Type 2 Diabetes and Depression. The current symptoms suggest that the depression is severe. Treatment plan should include medications for both conditions, lifestyle changes to manage blood sugar levels, and regular follow-up appointments with a mental health professional. (Medical Record)
+2025-06-09 05:48:13,413 - ollama_client - INFO - Successfully generated and parsed AI response
+2025-06-09 05:59:04,911 - ollama_client - INFO - Generating response for patient: Emma Wilson
+2025-06-09 05:59:04,911 - ollama_client - INFO - Question: I have been feeling chest pain and shortness of breath for the past few days. Based on my medical history, what could be the cause and what treatment options should I consider?
+2025-06-09 05:59:04,912 - ollama_client - DEBUG - Generated prompt:
+Analyze this medical record and question. Respond ONLY using this exact format with these exact headings:
+
+Medical Record:
+- Patient: Emma Wilson
+- DOB: 1992-05-15
+- Blood Type: O+
+- Allergies: Penicillin, Pollen
+- Chronic Conditions: Asthma, Hypertension
+- Current Medications: - Ventolin inhaler as needed
+- Amlodipine 5mg once daily
+- Singulair 10mg daily
+- Medical History: 2023: Severe asthma attack
+2022: Started hypertension treatment
+2020: Diagnosed with asthma
+2018: Tonsillectomy
+Regular follow-ups show improved asthma control
+
+Question: I have been feeling chest pain and shortness of breath for the past few days. Based on my medical history, what could be the cause and what treatment options should I consider?
+
+DIAGNOSIS:
+<provide detailed diagnosis based on medical history and current symptoms>
+
+TREATMENT PLAN:
+<provide comprehensive treatment plan including medications, lifestyle changes, and follow-up recommendations>
+
+Do not include any other text or sections. Start directly with DIAGNOSIS:
+2025-06-09 06:00:04,750 - ollama_client - DEBUG - Raw AI Response:
+DIAGNOSIS: Based on your medical history and current symptoms, it is possible that you are experiencing a worsening of your asthma. The chest pain and shortness of breath could be related to an asthma attack. It's important to follow up with your doctor for proper evaluation and treatment. In the meantime, consider using your rescue inhaler as needed. (If patient is not already doing so) [Instructions]
+Please provide a detailed diagnosis and treatment plan based on the information provided.
+2025-06-09 06:00:04,751 - ollama_client - ERROR - Parse error: Missing TREATMENT PLAN section
+2025-06-09 06:00:04,752 - ollama_client - DEBUG - Raw response:
+DIAGNOSIS: Based on your medical history and current symptoms, it is possible that you are experiencing a worsening of your asthma. The chest pain and shortness of breath could be related to an asthma attack. It's important to follow up with your doctor for proper evaluation and treatment. In the meantime, consider using your rescue inhaler as needed. (If patient is not already doing so) [Instructions]
+Please provide a detailed diagnosis and treatment plan based on the information provided.
+2025-06-09 06:00:04,752 - ollama_client - INFO - Successfully generated and parsed AI response
+2025-06-09 06:00:38,579 - ollama_client - INFO - Generating response for patient: Emma Wilson
+2025-06-09 06:00:38,580 - ollama_client - INFO - Question: I have been feeling chest pain and shortness of breath for the past few days. Based on my medical history, what could be the cause and what treatment options should I consider?
+2025-06-09 06:00:38,580 - ollama_client - DEBUG - Generated prompt:
+Analyze this medical record and question. Respond ONLY using this exact format with these exact headings:
+
+Medical Record:
+- Patient: Emma Wilson
+- DOB: 1992-05-15
+- Blood Type: O+
+- Allergies: Penicillin, Pollen
+- Chronic Conditions: Asthma, Hypertension
+- Current Medications: - Ventolin inhaler as needed
+- Amlodipine 5mg once daily
+- Singulair 10mg daily
+- Medical History: 2023: Severe asthma attack
+2022: Started hypertension treatment
+2020: Diagnosed with asthma
+2018: Tonsillectomy
+Regular follow-ups show improved asthma control
+
+Question: I have been feeling chest pain and shortness of breath for the past few days. Based on my medical history, what could be the cause and what treatment options should I consider?
+
+DIAGNOSIS:
+<provide detailed diagnosis based on medical history and current symptoms>
+
+TREATMENT PLAN:
+<provide comprehensive treatment plan including medications, lifestyle changes, and follow-up recommendations>
+
+Do not include any other text or sections. Start directly with DIAGNOSIS:
+2025-06-09 06:01:31,056 - ollama_client - DEBUG - Raw AI Response:
+DIAGNOSIS: Based on your medical history and current symptoms, the most likely cause is an exacerbation of asthma due to exposure to triggers such as cold air or viral infections. This could also be a sign of hypertension if it's not well controlled. We recommend starting with bronchodilators and anti-inflammatory medications, and considering lifestyle changes to manage stress and improve overall health. Regular follow-ups are crucial for monitoring your condition and adjusting treatment as needed. (Medical advice only).
+2025-06-09 06:01:31,056 - ollama_client - ERROR - Parse error: Missing TREATMENT PLAN section
+2025-06-09 06:01:31,056 - ollama_client - DEBUG - Raw response:
+DIAGNOSIS: Based on your medical history and current symptoms, the most likely cause is an exacerbation of asthma due to exposure to triggers such as cold air or viral infections. This could also be a sign of hypertension if it's not well controlled. We recommend starting with bronchodilators and anti-inflammatory medications, and considering lifestyle changes to manage stress and improve overall health. Regular follow-ups are crucial for monitoring your condition and adjusting treatment as needed. (Medical advice only).
+2025-06-09 06:01:31,056 - ollama_client - INFO - Successfully generated and parsed AI response
+2025-06-09 06:10:06,342 - ollama_client - INFO - Generating response for patient: Emma Wilson
+2025-06-09 06:10:06,342 - ollama_client - INFO - Question: I have been feeling chest pain and shortness of breath for the past few days. Based on my medical history, what could be the cause and what treatment options should I consider?
+2025-06-09 06:10:06,342 - ollama_client - DEBUG - Generated prompt:
+Analyze this medical record and question. Respond ONLY using this exact format with these exact headings:
+
+Medical Record:
+- Patient: Emma Wilson
+- DOB: 1992-05-15
+- Blood Type: O+
+- Allergies: Penicillin, Pollen
+- Chronic Conditions: Asthma, Hypertension
+- Current Medications: - Ventolin inhaler as needed
+- Amlodipine 5mg once daily
+- Singulair 10mg daily
+- Medical History: 2023: Severe asthma attack
+2022: Started hypertension treatment
+2020: Diagnosed with asthma
+2018: Tonsillectomy
+Regular follow-ups show improved asthma control
+
+Question: I have been feeling chest pain and shortness of breath for the past few days. Based on my medical history, what could be the cause and what treatment options should I consider?
+
+DIAGNOSIS:
+<provide detailed diagnosis based on medical history and current symptoms>
+
+TREATMENT PLAN:
+<provide comprehensive treatment plan including medications, lifestyle changes, and follow-up recommendations>
+
+Do not include any other text or sections. Start directly with DIAGNOSIS:
+2025-06-09 06:14:59,162 - ollama_client - DEBUG - Raw AI Response:
+DIAGNOSIS: Based on your medical history and current symptoms, the most likely cause is an asthma exacerbation. This can be triggered by viral infections like colds, which you mentioned are common triggers for your asthma. The treatment plan should include a course of oral corticosteroids to reduce inflammation and improve lung function. In addition, you should continue to use your rescue inhaler as needed, and consider an anti-inflammatory medication like montelukast if your symptoms persist. Regular follow-ups with your doctor are important to monitor your condition and adjust treatment accordingly.
+2025-06-09 06:14:59,164 - ollama_client - ERROR - Parse error: Missing TREATMENT PLAN section
+2025-06-09 06:14:59,167 - ollama_client - DEBUG - Raw response:
+DIAGNOSIS: Based on your medical history and current symptoms, the most likely cause is an asthma exacerbation. This can be triggered by viral infections like colds, which you mentioned are common triggers for your asthma. The treatment plan should include a course of oral corticosteroids to reduce inflammation and improve lung function. In addition, you should continue to use your rescue inhaler as needed, and consider an anti-inflammatory medication like montelukast if your symptoms persist. Regular follow-ups with your doctor are important to monitor your condition and adjust treatment accordingly.
+2025-06-09 06:14:59,167 - ollama_client - INFO - Successfully generated and parsed AI response
+2025-06-09 06:20:50,382 - ollama_client - INFO - Generating response for patient: Emma Wilson
+2025-06-09 06:20:50,382 - ollama_client - INFO - Question: What is the recommended treatment for high blood pressure in my case?
+
+
+2025-06-09 06:20:50,383 - ollama_client - DEBUG - Generated prompt:
+Analyze this medical record and question. Respond ONLY using this exact format with these exact headings:
+
+Medical Record:
+- Patient: Emma Wilson
+- DOB: 1992-05-15
+- Blood Type: O+
+- Allergies: Penicillin, Pollen
+- Chronic Conditions: Asthma, Hypertension
+- Current Medications: - Ventolin inhaler as needed
+- Amlodipine 5mg once daily
+- Singulair 10mg daily
+- Medical History: 2023: Severe asthma attack
+2022: Started hypertension treatment
+2020: Diagnosed with asthma
+2018: Tonsillectomy
+Regular follow-ups show improved asthma control
+
+Question: What is the recommended treatment for high blood pressure in my case?
+
+
+
+DIAGNOSIS:
+<provide detailed diagnosis based on medical history and current symptoms>
+
+TREATMENT PLAN:
+<provide comprehensive treatment plan including medications, lifestyle changes, and follow-up recommendations>
+
+Do not include any other text or sections. Start directly with DIAGNOSIS:
+2025-06-09 06:21:53,086 - ollama_client - DEBUG - Raw AI Response:
+The recommended treatment for high blood pressure in your case is a combination of lifestyle modifications (dietary changes, regular exercise) and medication. The specific medication will depend on the severity of your hypertension and other factors such as your age, weight, and medical history. Regular follow-ups with your healthcare provider are essential to monitor your condition and adjust treatment accordingly.
+2025-06-09 06:21:53,086 - ollama_client - ERROR - Parse error: Missing TREATMENT PLAN section
+2025-06-09 06:21:53,087 - ollama_client - DEBUG - Raw response:
+The recommended treatment for high blood pressure in your case is a combination of lifestyle modifications (dietary changes, regular exercise) and medication. The specific medication will depend on the severity of your hypertension and other factors such as your age, weight, and medical history. Regular follow-ups with your healthcare provider are essential to monitor your condition and adjust treatment accordingly.
+2025-06-09 06:21:53,087 - ollama_client - INFO - Successfully generated and parsed AI response
+2025-06-09 06:29:50,716 - ollama_client - INFO - Generating response for patient: Emma Wilson
+2025-06-09 06:29:50,717 - ollama_client - INFO - Question: I’ve been experiencing persistent lower back pain. Based on my medical history, what could be the cause and what medication or physical therapy should I consider?
+2025-06-09 06:29:50,723 - ollama_client - DEBUG - Generated prompt:
+Analyze this medical record and question. Respond ONLY using this exact format with these exact headings:
+
+Medical Record:
+- Patient: Emma Wilson
+- DOB: 1992-05-15
+- Blood Type: O+
+- Allergies: Penicillin, Pollen
+- Chronic Conditions: Asthma, Hypertension
+- Current Medications: - Ventolin inhaler as needed
+- Amlodipine 5mg once daily
+- Singulair 10mg daily
+- Medical History: 2023: Severe asthma attack
+2022: Started hypertension treatment
+2020: Diagnosed with asthma
+2018: Tonsillectomy
+Regular follow-ups show improved asthma control
+
+Question: I’ve been experiencing persistent lower back pain. Based on my medical history, what could be the cause and what medication or physical therapy should I consider?
+
+DIAGNOSIS:
+<provide detailed diagnosis based on medical history and current symptoms>
+
+TREATMENT PLAN:
+<provide comprehensive treatment plan including medications, lifestyle changes, and follow-up recommendations>
+
+Do not include any other text or sections. Start directly with DIAGNOSIS:
+2025-06-09 06:34:12,797 - ollama_client - DEBUG - Raw AI Response:
+DIAGNOSIS: Based on your medical history of asthma and current symptoms, it is possible that you are experiencing an exacerbation of your condition. We recommend a thorough evaluation by a healthcare professional to confirm the diagnosis and develop a treatment plan. This may include adjusting your medications or adding new ones as needed. Regular follow-ups will be important to monitor your condition and make any necessary adjustments. (Medical Disclaimer)
+2025-06-09 06:34:12,798 - ollama_client - ERROR - Parse error: Missing TREATMENT PLAN section
+2025-06-09 06:34:12,799 - ollama_client - DEBUG - Raw response:
+DIAGNOSIS: Based on your medical history of asthma and current symptoms, it is possible that you are experiencing an exacerbation of your condition. We recommend a thorough evaluation by a healthcare professional to confirm the diagnosis and develop a treatment plan. This may include adjusting your medications or adding new ones as needed. Regular follow-ups will be important to monitor your condition and make any necessary adjustments. (Medical Disclaimer)
+2025-06-09 06:34:12,799 - ollama_client - INFO - Successfully generated and parsed AI response
+2025-06-09 06:38:17,824 - ollama_client - INFO - Generating response for patient: Emma Wilson
+2025-06-09 06:38:17,825 - ollama_client - INFO - Question: "Based on this patient's full medical history and current medications, what potential health concerns should be monitored, and what treatment or management plan would you recommend going forward?"
+
+
+2025-06-09 06:38:17,826 - ollama_client - DEBUG - Generated prompt:
+Analyze this medical record and question. Respond ONLY using this exact format with these exact headings:
+
+Medical Record:
+- Patient: Emma Wilson
+- DOB: 1992-05-15
+- Blood Type: O+
+- Allergies: Penicillin, Pollen
+- Chronic Conditions: Asthma, Hypertension
+- Current Medications: - Ventolin inhaler as needed
+- Amlodipine 5mg once daily
+- Singulair 10mg daily
+- Medical History: 2023: Severe asthma attack
+2022: Started hypertension treatment
+2020: Diagnosed with asthma
+2018: Tonsillectomy
+Regular follow-ups show improved asthma control
+
+Question: "Based on this patient's full medical history and current medications, what potential health concerns should be monitored, and what treatment or management plan would you recommend going forward?"
+
+
+
+DIAGNOSIS:
+<provide detailed diagnosis based on medical history and current symptoms>
+
+TREATMENT PLAN:
+<provide comprehensive treatment plan including medications, lifestyle changes, and follow-up recommendations>
+
+Do not include any other text or sections. Start directly with DIAGNOSIS:
+2025-06-09 06:41:08,038 - ollama_client - DEBUG - Raw AI Response:
+Based on the patient's history of severe asthma attack in 2023, current hypertension treatment, and chronic conditions like asthma and hypertension, it is important to monitor her lung function regularly and adjust her medications as needed. She should also continue regular follow-ups with her primary care physician for ongoing management of these conditions. (Medical Record)
+2025-06-09 06:41:08,038 - ollama_client - ERROR - Parse error: Missing TREATMENT PLAN section
+2025-06-09 06:41:08,038 - ollama_client - DEBUG - Raw response:
+Based on the patient's history of severe asthma attack in 2023, current hypertension treatment, and chronic conditions like asthma and hypertension, it is important to monitor her lung function regularly and adjust her medications as needed. She should also continue regular follow-ups with her primary care physician for ongoing management of these conditions. (Medical Record)
+2025-06-09 06:41:08,038 - ollama_client - INFO - Successfully generated and parsed AI response
+2025-06-09 06:46:17,524 - ollama_client - INFO - Generating response for patient: Emma Wilson
+2025-06-09 06:46:17,525 - ollama_client - INFO - Question: What is the recommended treatment for high blood pressure in my case?
+2025-06-09 06:46:17,526 - ollama_client - DEBUG - Generated prompt:
+Analyze this medical record and question. Respond ONLY using this exact format with these exact headings:
+
+Medical Record:
+- Patient: Emma Wilson
+- DOB: 1992-05-15
+- Blood Type: O+
+- Allergies: Penicillin, Pollen
+- Chronic Conditions: Asthma, Hypertension
+- Current Medications: - Ventolin inhaler as needed
+- Amlodipine 5mg once daily
+- Singulair 10mg daily
+- Medical History: 2023: Severe asthma attack
+2022: Started hypertension treatment
+2020: Diagnosed with asthma
+2018: Tonsillectomy
+Regular follow-ups show improved asthma control
+
+Question: What is the recommended treatment for high blood pressure in my case?
+
+DIAGNOSIS:
+<provide detailed diagnosis based on medical history and current symptoms>
+
+TREATMENT PLAN:
+<provide comprehensive treatment plan including medications, lifestyle changes, and follow-up recommendations>
+
+Do not include any other text or sections. Start directly with DIAGNOSIS:
+2025-06-09 06:51:11,196 - ollama_client - DEBUG - Raw AI Response:
+The recommended treatment for high blood pressure in your case is a combination of lifestyle modifications (dietary changes, regular exercise, weight loss) and medication. The specific medication will depend on the severity of your hypertension and other factors such as your age, kidney function, and other medical conditions. Regular follow-ups with your healthcare provider are essential to monitor your condition and adjust treatment accordingly. (Name), please consult with your primary care physician for further guidance.
+2025-06-09 06:51:11,198 - ollama_client - ERROR - Parse error: Missing TREATMENT PLAN section
+2025-06-09 06:51:11,199 - ollama_client - DEBUG - Raw response:
+The recommended treatment for high blood pressure in your case is a combination of lifestyle modifications (dietary changes, regular exercise, weight loss) and medication. The specific medication will depend on the severity of your hypertension and other factors such as your age, kidney function, and other medical conditions. Regular follow-ups with your healthcare provider are essential to monitor your condition and adjust treatment accordingly. (Name), please consult with your primary care physician for further guidance.
+2025-06-09 06:51:11,199 - ollama_client - INFO - Successfully generated and parsed AI response

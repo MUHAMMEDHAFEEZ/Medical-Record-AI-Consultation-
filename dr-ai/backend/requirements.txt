@@ -1,0 +1,14 @@
+Django==5.0.0
+djangorestframework==3.14.0
+djangorestframework-simplejwt==5.3.1
+django-cors-headers==4.3.1
+python-dotenv==1.0.0
+reportlab==4.0.8
+Pillow>=10.0.0
+requests==2.31.0
+python-magic-bin==0.4.14; sys_platform == 'win32'
+python-magic>=0.4.27; sys_platform != 'win32'
+langchain
+langchain-community
+langchain-core
+langchain-ollama
