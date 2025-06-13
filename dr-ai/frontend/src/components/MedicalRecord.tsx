@@ -110,67 +110,99 @@ export default function MedicalRecord() {
   if (loading) return <div className="p-4">Loading...</div>;
   if (error) return <div className="p-4 text-red-500">{error}</div>;
   if (!record) return <div className="p-4">No medical record found</div>;
-
   return (
-    <div className="max-w-4xl mx-auto p-4 sm:p-6 text-gray-800">
-      <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 border border-green-100">
+    <div className="min-h-screen bg-gray-50 px-2 py-4 sm:px-4 sm:py-6">
+      <div className="max-w-4xl mx-auto">
+        <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-green-100 overflow-hidden">
 
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 bg-green-50 p-4 rounded-lg">
-          <div className="flex items-center gap-3">
-            <img src={logo} alt="DR AI Logo" className="h-10 w-auto" />
-            <h1 className="text-xl sm:text-2xl font-bold">Medical Record</h1>
-          </div>
-          <button
-            onClick={handleDownloadPDF}
-            className="bg-green-600 text-white px-4 py-2 rounded-full flex items-center gap-2 hover:bg-green-700 text-sm sm:text-base"
-          >
-            📄 Download PDF
-          </button>
-        </div>
+          <div className="bg-green-50 p-3 sm:p-4 border-b border-green-100">
+            <div className="flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:justify-between sm:items-center">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <img src={logo} alt="DR AI Logo" className="h-8 sm:h-10 w-auto flex-shrink-0" />
+                <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-800">Medical Record</h1>
+              </div>
+              <button
+                onClick={handleDownloadPDF}
+                className="bg-green-600 text-white px-3 py-2 sm:px-4 sm:py-2 rounded-lg sm:rounded-full flex items-center justify-center gap-2 hover:bg-green-700 transition-colors text-sm font-medium w-full sm:w-auto"
+              >
+                📄 Download PDF
+              </button>
+            </div>
+          </div>          <div className="p-3 sm:p-4 md:p-6 space-y-4 sm:space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 md:gap-6">
+              <div className="bg-gray-50 p-3 sm:p-4 rounded-lg">
+                <h2 className="text-base sm:text-lg font-semibold mb-3 text-gray-800 flex items-center gap-2">
+                  👤 Patient Information
+                </h2>
+                <div className="space-y-2 text-sm sm:text-base">
+                  <p className="flex flex-col sm:flex-row sm:items-center gap-1">
+                    <strong className="text-gray-700 min-w-fit">Full Name:</strong> 
+                    <span className="text-gray-900">{record.full_name}</span>
+                  </p>
+                  <p className="flex flex-col sm:flex-row sm:items-center gap-1">
+                    <strong className="text-gray-700 min-w-fit">🎂 DOB:</strong> 
+                    <span className="text-gray-900">{new Date(record.date_of_birth).toLocaleDateString()}</span>
+                  </p>
+                  <p className="flex flex-col sm:flex-row sm:items-center gap-1">
+                    <strong className="text-gray-700 min-w-fit">🩸 Blood Type:</strong> 
+                    <span className="text-gray-900">{record.blood_type}</span>
+                  </p>
+                </div>
+              </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-6">
-          <div className="bg-gray-50 p-4 rounded-xl">
-            <h2 className="text-lg font-semibold mb-2">👤 Patient Information</h2>
-            <p><strong>Full Name:</strong> {record.full_name}</p>
-            <p><strong>🎂 DOB:</strong> {new Date(record.date_of_birth).toLocaleDateString()}</p>
-            <p><strong>🩸 Blood Type:</strong> {record.blood_type}</p>
-          </div>
+              <div className="bg-gray-50 p-3 sm:p-4 rounded-lg">
+                <h2 className="text-base sm:text-lg font-semibold mb-3 text-gray-800 flex items-center gap-2">
+                  📋 Medical Info
+                </h2>
+                <div className="space-y-2 text-sm sm:text-base">
+                  <p className="flex flex-col gap-1">
+                    <strong className="text-gray-700">🌿 Allergies:</strong> 
+                    <span className="text-gray-900 break-words">{record.allergies}</span>
+                  </p>
+                  <p className="flex flex-col gap-1">
+                    <strong className="text-gray-700">🦴 Chronic Conditions:</strong> 
+                    <span className="text-gray-900 break-words">{record.chronic_conditions}</span>
+                  </p>
+                </div>
+              </div>
+            </div>            <div className="bg-gray-50 p-3 sm:p-4 rounded-lg">
+              <h2 className="text-base sm:text-lg font-semibold mb-3 text-gray-800 flex items-center gap-2">
+                💊 Current Medications
+              </h2>
+              <div className="text-sm sm:text-base text-gray-900 whitespace-pre-wrap break-words leading-relaxed">
+                {record.medications}
+              </div>
+            </div>
 
-          <div className="bg-gray-50 p-4 rounded-xl">
-            <h2 className="text-lg font-semibold mb-2">📋 Medical Info</h2>
-            <p><strong>🌿 Allergies:</strong> {record.allergies}</p>
-            <p><strong>🦴 Chronic Conditions:</strong> {record.chronic_conditions}</p>
-          </div>
-        </div>
-
-        <div className="mb-6 bg-gray-50 p-4 rounded-xl">
-          <h2 className="text-lg font-semibold mb-2">💊 Current Medications</h2>
-          <p className="whitespace-pre-wrap">{record.medications}</p>
-        </div>
-
-        <div className="mb-6 bg-gray-50 p-4 rounded-xl">
-          <h2 className="text-lg font-semibold mb-2">📖 Medical History</h2>
-          <p className="whitespace-pre-wrap">{record.medical_history}</p>
-        </div>
-
-        <div className="bg-green-50 p-4 sm:p-6 rounded-xl">
-          <h2 className="text-xl font-bold mb-4">🤖 AI Consultation</h2>
-          <form onSubmit={handleAIConsultation} className="space-y-4">
-            <textarea
-              className="w-full rounded-xl border border-gray-300 p-4 focus:ring-2 focus:ring-green-400 text-sm"
-              rows={4}
-              placeholder="🧠 Ask your medical question..."
-              value={aiConsult.question}
-              onChange={(e) => setAiConsult({ question: e.target.value })}
-            />
-            <button
-              type="submit"
-              disabled={isLoading}
-              className={`w-full sm:w-auto bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition flex items-center justify-center gap-2 text-sm sm:text-base ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
-            >
-              {isLoading ? '⏳ Processing...' : '📩 Get AI Consultation'}
-            </button>
-          </form>
+            <div className="bg-gray-50 p-3 sm:p-4 rounded-lg">
+              <h2 className="text-base sm:text-lg font-semibold mb-3 text-gray-800 flex items-center gap-2">
+                📖 Medical History
+              </h2>
+              <div className="text-sm sm:text-base text-gray-900 whitespace-pre-wrap break-words leading-relaxed">
+                {record.medical_history}
+              </div>
+            </div>            <div className="bg-green-50 p-3 sm:p-4 md:p-6 rounded-lg border border-green-200">
+              <h2 className="text-lg sm:text-xl font-bold mb-4 text-gray-800 flex items-center gap-2">
+                🤖 AI Consultation
+              </h2>
+              <form onSubmit={handleAIConsultation} className="space-y-4">
+                <div>
+                  <textarea
+                    className="w-full rounded-lg border border-gray-300 p-3 sm:p-4 focus:ring-2 focus:ring-green-400 focus:border-green-400 text-sm sm:text-base resize-none transition-all duration-200"
+                    rows={4}
+                    placeholder="🧠 Ask your medical question..."
+                    value={aiConsult.question}
+                    onChange={(e) => setAiConsult({ question: e.target.value })}
+                  />
+                </div>
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className={`w-full bg-green-600 text-white px-4 py-3 rounded-lg hover:bg-green-700 transition-all duration-200 flex items-center justify-center gap-2 text-sm sm:text-base font-medium ${isLoading ? 'opacity-50 cursor-not-allowed' : 'active:scale-95'}`}
+                >
+                  {isLoading ? '⏳ Processing...' : '📩 Get AI Consultation'}
+                </button>
+              </form>
 
           {consultationResult && (
             <div className="mt-6 space-y-4">
