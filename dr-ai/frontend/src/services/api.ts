@@ -5,7 +5,7 @@ const API_BASE_URL = isDevelopment
     ? 'https://rj8vq174-8000.uks1.devtunnels.ms/api'
     : 'http://localhost:8000/api';
 //https://rj8vq174-8000.uks1.devtunnels.ms/api
-// Create axios instance with default config
+
 const axiosInstance = axios.create({
     baseURL: API_BASE_URL
 });
