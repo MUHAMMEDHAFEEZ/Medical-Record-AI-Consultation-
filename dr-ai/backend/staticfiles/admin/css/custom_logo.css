@@ -1,0 +1,34 @@
+#header {
+    height: auto !important;
+    padding: 15px 40px !important;
+    background: #2c3e50 !important;
+}
+
+#branding h1 {
+    margin: 0 !important;
+    padding: 5px 10px !important;
+    text-align: left !important;
+}
+
+#branding h1 img.logo {
+    max-height: 35px !important;
+    margin-top: -5px !important;
+    vertical-align: middle !important;
+    display: inline-block !important;
+}
+
+.login #header {
+    height: auto !important;
+    padding: 15px !important;
+}
+
+.login #branding {
+    float: none !important;
+    padding: 8px !important;
+}
+
+.login #branding h1 img.logo {
+    max-width: 180px !important;
+    margin: 0 auto !important;
+    display: block !important;
+}

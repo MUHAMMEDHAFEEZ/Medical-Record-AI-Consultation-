@@ -1,0 +1,79 @@
+:root {
+    --primary: #2c3e50;
+    --secondary: #34495e;
+    --accent: #3498db;
+    --primary-fg: #fff;
+    
+    --body-fg: #333;
+    --body-bg: #f5f6fa;
+    --body-quiet-color: #666;
+    --body-loud-color: #000;
+    
+    --header-color: var(--accent);
+    --header-branding-color: var(--accent);
+    --header-bg: var(--primary);
+    --header-link-color: var(--primary-fg);
+    
+    --breadcrumbs-fg: #c4dce8;
+    --breadcrumbs-link-fg: var(--body-bg);
+    --breadcrumbs-bg: var(--secondary);
+    
+    --link-fg: #2980b9;
+    --link-hover-color: #3498db;
+    --link-selected-fg: #5b80b2;
+    
+    --button-fg: #fff;
+    --button-bg: var(--accent);
+    --button-hover-bg: #2980b9;
+    
+    --default-button-fg: #666;
+    --default-button-bg: #f5f5f5;
+    --default-button-hover-bg: #e0e0e0;
+}
+
+#header {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.module h2, .module caption, .inline-group h2 {
+    background: var(--primary);
+    color: var(--primary-fg);
+    border-radius: 4px 4px 0 0;
+}
+
+.button, input[type=submit], input[type=button], .submit-row input, a.button {
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.button:hover, input[type=submit]:hover, input[type=button]:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.button.default, input[type=submit].default, .submit-row input.default {
+    background: var(--accent);
+}
+
+.object-tools a {
+    border-radius: 4px;
+    background: var(--accent);
+}
+
+.object-tools a:hover {
+    background: var(--button-hover-bg);
+}
+
+#content-related .module h2 {
+    background: var(--secondary);
+    color: var(--primary-fg);
+    border-radius: 4px 4px 0 0;
+}
+
+.login #header {
+    background: var(--primary);
+    height: auto;
+    padding: 15px 0;
+}

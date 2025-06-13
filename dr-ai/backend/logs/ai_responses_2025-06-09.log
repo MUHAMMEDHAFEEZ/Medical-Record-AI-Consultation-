@@ -836,3 +836,152 @@ DIAGNOSIS: Emma Wilson has severe asthma with poor control despite current treat
 2025-06-09 19:57:09,772 - ollama_client - INFO - Successfully generated and parsed AI response
 2025-06-09 19:59:40,926 - ollama_client - INFO - Initialized Ollama client with model: medllama2
 2025-06-09 20:02:39,567 - ollama_client - INFO - Initialized Ollama client with model: medllama2
+2025-06-09 21:12:28,482 - ollama_client - INFO - Generating response for patient: James Cooper
+2025-06-09 21:12:28,483 - ollama_client - INFO - Question: ضرسي بيوجعني و عندي الم شديد فيها 
+2025-06-09 21:12:28,483 - ollama_client - DEBUG - Generated prompt:
+Analyze this medical record and question. Respond ONLY using this exact format with these exact headings:
+
+Medical Record:
+- Patient: James Cooper
+- DOB: 1988-11-20
+- Blood Type: A-
+- Allergies: Seafood
+- Chronic Conditions: Type 2 Diabetes, Depression
+- Current Medications: - Metformin 850mg twice daily
+- Glimepiride 2mg once daily
+- Sertraline 50mg daily
+- Aspirin 81mg daily
+- Medical History: 2021: Diagnosed with Type 2 Diabetes
+2020: Started depression treatment
+2019: Elevated HbA1c levels
+2017: Cholecystectomy
+Regular monitoring shows improving blood sugar levels
+
+Question: ضرسي بيوجعني و عندي الم شديد فيها 
+
+DIAGNOSIS:
+<provide detailed diagnosis based on medical history and current symptoms>
+
+TREATMENT PLAN:
+<provide comprehensive treatment plan including medications, lifestyle changes, and follow-up recommendations>
+
+Do not include any other text or sections. Start directly with DIAGNOSIS:
+2025-06-09 21:13:45,207 - ollama_client - DEBUG - Raw AI Response:
+The patient's history of Type 2 Diabetes and depression suggest a high risk for metabolic syndrome. The current symptoms of severe abdominal pain, nausea, vomiting, and fever are concerning for acute pancreatitis. Further investigation is warranted to confirm the diagnosis. Treatment should focus on addressing the underlying cause, which may involve medication adjustments or further testing. Regular monitoring of blood sugar levels and depression symptoms is crucial. (Medical Record) [1]
+
+This patient's history suggests a high risk for metabolic syndrome, and current symptoms are concerning for acute pancreatitis. Further investigation is warranted to confirm the diagnosis. Treatment should focus on addressing the underlying cause, which may involve medication adjustments or further testing. Regular monitoring of blood sugar levels and depression symptoms is crucial. (Medical Record) [1]
+2025-06-09 21:13:45,207 - ollama_client - ERROR - Parse error: Missing TREATMENT PLAN section
+2025-06-09 21:13:45,207 - ollama_client - DEBUG - Raw response:
+The patient's history of Type 2 Diabetes and depression suggest a high risk for metabolic syndrome. The current symptoms of severe abdominal pain, nausea, vomiting, and fever are concerning for acute pancreatitis. Further investigation is warranted to confirm the diagnosis. Treatment should focus on addressing the underlying cause, which may involve medication adjustments or further testing. Regular monitoring of blood sugar levels and depression symptoms is crucial. (Medical Record) [1]
+
+This patient's history suggests a high risk for metabolic syndrome, and current symptoms are concerning for acute pancreatitis. Further investigation is warranted to confirm the diagnosis. Treatment should focus on addressing the underlying cause, which may involve medication adjustments or further testing. Regular monitoring of blood sugar levels and depression symptoms is crucial. (Medical Record) [1]
+2025-06-09 21:13:45,208 - ollama_client - INFO - Successfully generated and parsed AI response
+2025-06-09 21:19:15,384 - ollama_client - INFO - Generating response for patient: Ahmed Mohamed
+2025-06-09 21:19:15,384 - ollama_client - INFO - Question: ضرسي بيوجعني عاوز حد يدلعني 
+2025-06-09 21:19:15,385 - ollama_client - DEBUG - Generated prompt:
+Analyze this medical record and question. Respond ONLY using this exact format with these exact headings:
+
+Medical Record:
+- Patient: Ahmed Mohamed
+- DOB: 1985-03-15
+- Blood Type: A+
+- Allergies: Penicillin, Dust
+- Chronic Conditions: Type 2 Diabetes, Hypertension
+- Current Medications: - Metformin 500mg twice daily
+- Lisinopril 10mg once daily
+- Aspirin 81mg once daily
+- Medical History: 2020: Diagnosed with Type 2 Diabetes
+2018: Hypertension diagnosis
+2015: Appendectomy
+2010: Fractured right ankle
+Regular checkups show stable blood pressure and improving blood sugar levels.
+
+Question: ضرسي بيوجعني عاوز حد يدلعني 
+
+DIAGNOSIS:
+<provide detailed diagnosis based on medical history and current symptoms>
+
+TREATMENT PLAN:
+<provide comprehensive treatment plan including medications, lifestyle changes, and follow-up recommendations>
+
+Do not include any other text or sections. Start directly with DIAGNOSIS:
+2025-06-09 21:20:05,627 - ollama_client - DEBUG - Raw AI Response:
+Ahmed's medical history suggests a high risk for cardiovascular disease due to his hypertension and diabetes. His current blood pressure is elevated, which could be indicative of uncontrolled hypertension. We recommend starting him on an ACE inhibitor or ARB to control his blood pressure. Additionally, we suggest a lifestyle change plan that includes regular exercise, weight loss, and a healthy diet. Regular follow-up appointments are necessary to monitor his condition and adjust treatment as needed. (Medical Record) [1]
+
+Note: This is just an example response based on the provided information. The actual diagnosis and treatment plan may vary depending on individual circumstances.
+2025-06-09 21:20:05,627 - ollama_client - ERROR - Parse error: Missing TREATMENT PLAN section
+2025-06-09 21:20:05,627 - ollama_client - DEBUG - Raw response:
+Ahmed's medical history suggests a high risk for cardiovascular disease due to his hypertension and diabetes. His current blood pressure is elevated, which could be indicative of uncontrolled hypertension. We recommend starting him on an ACE inhibitor or ARB to control his blood pressure. Additionally, we suggest a lifestyle change plan that includes regular exercise, weight loss, and a healthy diet. Regular follow-up appointments are necessary to monitor his condition and adjust treatment as needed. (Medical Record) [1]
+
+Note: This is just an example response based on the provided information. The actual diagnosis and treatment plan may vary depending on individual circumstances.
+2025-06-09 21:20:05,627 - ollama_client - INFO - Successfully generated and parsed AI response
+2025-06-10 02:00:45,118 - ollama_client - INFO - Generating response for patient: Ahmed Mohamed
+2025-06-10 02:00:45,118 - ollama_client - INFO - Question: اهلا
+
+2025-06-10 02:00:45,119 - ollama_client - DEBUG - Generated prompt:
+Analyze this medical record and question. Respond ONLY using this exact format with these exact headings:
+
+Medical Record:
+- Patient: Ahmed Mohamed
+- DOB: 1985-03-15
+- Blood Type: A+
+- Allergies: Penicillin, Dust
+- Chronic Conditions: Type 2 Diabetes, Hypertension
+- Current Medications: - Metformin 500mg twice daily
+- Lisinopril 10mg once daily
+- Aspirin 81mg once daily
+- Medical History: 2020: Diagnosed with Type 2 Diabetes
+2018: Hypertension diagnosis
+2015: Appendectomy
+2010: Fractured right ankle
+Regular checkups show stable blood pressure and improving blood sugar levels.
+
+Question: اهلا
+
+
+DIAGNOSIS:
+<provide detailed diagnosis based on medical history and current symptoms>
+
+TREATMENT PLAN:
+<provide comprehensive treatment plan including medications, lifestyle changes, and follow-up recommendations>
+
+Do not include any other text or sections. Start directly with DIAGNOSIS:
+2025-06-10 02:02:14,074 - ollama_client - DEBUG - Raw AI Response:
+DIAGNOSIS: Ahmed has Type 2 Diabetes and Hypertension. His current medications are appropriate for his conditions. However, he should continue to monitor his blood sugar levels regularly and make adjustments as needed. He should also maintain a healthy diet and exercise routine. Regular checkups with his primary care physician will help ensure that his condition is well-managed. (Provide specific recommendations based on the patient's medical history and current symptoms.)
+TREATMENT PLAN: Ahmed should continue to take Metformin 500mg twice daily, Lisinopril 10mg once daily, and Aspirin 81mg once daily. He should also adhere to a healthy diet and exercise routine. Regular checkups with his primary care physician will help ensure that his condition is well-managed. (Provide specific recommendations based on the patient's medical history and current symptoms.)
+2025-06-10 02:02:14,074 - ollama_client - INFO - Successfully generated and parsed AI response
+2025-06-10 03:44:57,649 - ollama_client - INFO - Generating response for patient: Ahmed Mohamed
+2025-06-10 03:44:57,649 - ollama_client - INFO - Question: help i have a headache 
+2025-06-10 03:44:57,650 - ollama_client - DEBUG - Generated prompt:
+Analyze this medical record and question. Respond ONLY using this exact format with these exact headings:
+
+Medical Record:
+- Patient: Ahmed Mohamed
+- DOB: 1985-03-15
+- Blood Type: A+
+- Allergies: Penicillin, Dust
+- Chronic Conditions: Type 2 Diabetes, Hypertension
+- Current Medications: - Metformin 500mg twice daily
+- Lisinopril 10mg once daily
+- Aspirin 81mg once daily
+- Medical History: 2020: Diagnosed with Type 2 Diabetes
+2018: Hypertension diagnosis
+2015: Appendectomy
+2010: Fractured right ankle
+Regular checkups show stable blood pressure and improving blood sugar levels.
+
+Question: help i have a headache 
+
+DIAGNOSIS:
+<provide detailed diagnosis based on medical history and current symptoms>
+
+TREATMENT PLAN:
+<provide comprehensive treatment plan including medications, lifestyle changes, and follow-up recommendations>
+
+Do not include any other text or sections. Start directly with DIAGNOSIS:
+2025-06-10 03:45:49,036 - ollama_client - DEBUG - Raw AI Response:
+The patient's headache could be related to their hypertension, diabetes, or a side effect of their medication. I would recommend checking blood pressure and blood sugar levels, as well as reviewing the patient's medications for potential interactions. If necessary, we can adjust the treatment plan accordingly. What are your thoughts? [/INST] DIAGNOSIS: The patient's headache could be related to their hypertension, diabetes, or a side effect of his medication. I would recommend checking blood pressure and blood sugar levels, as well as reviewing the patient's medications for potential interactions. If necessary, we can adjust the treatment plan accordingly. What are your thoughts?
+2025-06-10 03:45:49,037 - ollama_client - ERROR - Parse error: Missing TREATMENT PLAN section
+2025-06-10 03:45:49,037 - ollama_client - DEBUG - Raw response:
+The patient's headache could be related to their hypertension, diabetes, or a side effect of their medication. I would recommend checking blood pressure and blood sugar levels, as well as reviewing the patient's medications for potential interactions. If necessary, we can adjust the treatment plan accordingly. What are your thoughts? [/INST] DIAGNOSIS: The patient's headache could be related to their hypertension, diabetes, or a side effect of his medication. I would recommend checking blood pressure and blood sugar levels, as well as reviewing the patient's medications for potential interactions. If necessary, we can adjust the treatment plan accordingly. What are your thoughts?
+2025-06-10 03:45:49,037 - ollama_client - INFO - Successfully generated and parsed AI response

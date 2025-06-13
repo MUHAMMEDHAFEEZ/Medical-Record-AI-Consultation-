@@ -1,0 +1,27 @@
+.admin-header {
+    display: flex;
+    align-items: center;
+}
+
+.admin-logo {
+    max-height: 60px;
+    margin-right: 10px;
+}
+
+#header {
+    height: auto !important;
+    padding: 15px 40px !important;
+    display: flex;
+    align-items: center;
+}
+
+#branding h1 {
+    margin: 0;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.login #header {
+    height: auto !important;
+    padding: 15px 20px !important;
+}

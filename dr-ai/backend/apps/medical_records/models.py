@@ -12,12 +12,12 @@ class MedicalRecord(models.Model):
         # Generate 6-character alphanumeric ID
         chars = string.ascii_uppercase + string.digits
         return ''.join(random.choices(chars, k=6))
-    
-    # Replace UUID with short ID
-    nfc_id = models.UUIDField(
-        default=uuid.uuid4,
-        editable=False,
+      # Short ID for NFC tag
+    nfc_id = models.CharField(
+        max_length=6,
+        default=generate_short_id,
         unique=True,
+        help_text='Short ID for NFC tag',
         db_index=True
     )
     full_name = models.CharField(max_length=255)

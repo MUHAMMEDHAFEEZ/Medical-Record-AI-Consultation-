@@ -35,17 +35,8 @@ def public_medical_record(request, nfc_id):
     Public endpoint for retrieving medical record by NFC ID
     """
     try:
-        # Validate UUID format
-        try:
-            uuid_obj = UUID(nfc_id)
-        except ValueError:
-            return Response(
-                {'error': 'Invalid NFC ID format'},
-                status=status.HTTP_400_BAD_REQUEST
-            )
-
-        # Get record
-        record = get_object_or_404(MedicalRecord, nfc_id=uuid_obj)
+        # Get record using the NFC ID string
+        record = get_object_or_404(MedicalRecord, nfc_id=nfc_id)
         data = MedicalRecordSerializer(record).data
         
         # Add NFC URL to response

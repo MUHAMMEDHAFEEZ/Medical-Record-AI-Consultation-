@@ -1,0 +1,142 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<style>
+    :root {
+        --primary: #00d0bd;
+        --secondary: #0072ff;
+        --accent: #3498db;
+        --text-color: #2c3e50;
+        --bg-color: #ffffff;
+        --header-bg: #2c3e50;
+        --card-bg: #ffffff;
+        --border-color: #e5e7eb;
+    }
+
+    body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        font-family: 'Roboto', sans-serif;
+    }
+
+    /* Header Styling */
+    #header {
+        background: var(--header-bg);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        height: 60px !important;
+        padding: 10px 20px !important;
+    }
+
+    #branding {
+        display: flex;
+        align-items: center;
+    }
+
+    .custom-logo {
+        height: 40px;
+        margin-right: 15px;
+    }
+
+    #site-name {
+        color: #ffffff;
+        font-weight: 500;
+        font-size: 1.5rem;
+    }
+
+    /* Module Styling */
+    .module h2, .module caption {
+        background: var(--secondary);
+        color: #fff;
+        border-radius: 4px 4px 0 0;
+        padding: 12px 15px;
+    }
+
+    .module {
+        background: var(--card-bg);
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        margin-bottom: 20px;
+        border: 1px solid var(--border-color);
+    }
+
+    /* Button Styling */
+    .button, input[type=submit], input[type=button], .submit-row input {
+        background: var(--primary);
+        color: white;
+        border-radius: 4px;
+        padding: 10px 15px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .button:hover, input[type=submit]:hover, input[type=button]:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+    }
+
+    /* Table Styling */
+    #changelist table {
+        border-radius: 4px;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    #changelist table thead th {
+        background: var(--header-bg);
+        color: #ffffff;
+        padding: 12px 15px;
+    }
+
+    /* Form Styling */
+    .form-row {
+        padding: 12px 15px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    /* Dashboard Cards */
+    .dashboard .module {
+        background: var(--card-bg);
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        transition: all 0.3s ease;
+    }
+
+    .dashboard .module:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    /* Breadcrumbs */
+    .breadcrumbs {
+        background: #f8f9fa;
+        padding: 15px 20px;
+        border-radius: 4px;
+        margin-bottom: 20px;
+    }
+
+    /* Messages */
+    .success {
+        background: #28a745 !important;
+    }
+    
+    .warning {
+        background: #ffc107 !important;
+    }
+    
+    .error {
+        background: #dc3545 !important;
+    }
+</style>
+{% endblock %}
+
+{% block branding %}
+<div id="branding">
+    <img src="{% static 'logo (2).png' %}" alt="DR AI Logo" class="custom-logo">
+    <h1 id="site-name">{{ site_header|default:_('DR AI Administration') }}</h1>
+</div>
+{% endblock %}

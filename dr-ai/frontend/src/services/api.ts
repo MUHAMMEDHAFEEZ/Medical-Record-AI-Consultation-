@@ -1,7 +1,10 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'https://rj8vq174-8000.uks1.devtunnels.ms/api';
-
+const isDevelopment = process.env.NODE_ENV === 'development';
+const API_BASE_URL = isDevelopment 
+    ? 'https://rj8vq174-8000.uks1.devtunnels.ms/api'
+    : 'http://localhost:8000/api';
+//https://rj8vq174-8000.uks1.devtunnels.ms/api
 // Create axios instance with default config
 const axiosInstance = axios.create({
     baseURL: API_BASE_URL
@@ -40,20 +43,20 @@ export const auth = {
 };
 
 // Medical Records API
-const API_URL = 'https://rj8vq174-8000.uks1.devtunnels.ms/api';
-
 export const medicalRecords = {
     getMedicalRecord: async () => {
-        const response = await axiosInstance.get('/medical/record/');
+        const response = await axiosInstance.get('/medical-records/record/');
         return response.data;
     },
 
     createMedicalRecord: async (data: any) => {
-        const response = await axiosInstance.post('/medical/record/', data);
+        const response = await axiosInstance.post('/medical-records/record/', data);
         return response.data;
-    },    getPublicRecord: async (nfcId: string) => {
+    },
+
+    getPublicRecord: async (nfcId: string) => {
         try {
-            const response = await axios.get(`${API_BASE_URL}/medical/record/${nfcId}/`);
+            const response = await axios.get(`${API_BASE_URL}/medical-records/record/${nfcId}/`);
             return response.data;
         } catch (error) {
             console.error('Error fetching public record:', error);
@@ -62,11 +65,11 @@ export const medicalRecords = {
     },
 
     getMedicalRecordPDF: (nfcId: string) => 
-        `${API_BASE_URL}/medical/record/${nfcId}/pdf/`,
+        `${API_BASE_URL}/medical-records/record/${nfcId}/pdf/`,
 
     submitAIConsultation: async (nfcId: string, question: string) => {
         try {
-            const response = await fetch(`${API_URL}/medical/consultation/${nfcId}/`, {
+            const response = await fetch(`${API_BASE_URL}/medical-records/consultation/${nfcId}/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -84,11 +87,11 @@ export const medicalRecords = {
     },
 
     getConsultationPDF: (consultationId: string) => 
-        `${API_BASE_URL}/medical/consultation/${consultationId}/pdf/`,
+        `${API_BASE_URL}/medical-records/consultation/${consultationId}/pdf/`,
         
     getMedicalRecordByNFC: async (nfcId: string) => {
         try {
-            const response = await fetch(`${API_BASE_URL}/medical/record/${nfcId}/`);
+            const response = await fetch(`${API_BASE_URL}/medical-records/record/${nfcId}/`);
             
             if (!response.ok) {
                 const errorData = await response.json();
