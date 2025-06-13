@@ -15,4 +15,6 @@ urlpatterns = [
         utils.generate_consultation_pdf(views.get_object_or_404(views.AIConsultation, id=consultation_id)),
         filename=f'consultation_{consultation_id}.pdf'
     ), name='consultation_pdf'),
+    # path('record/<str:nfc_id>/generate-pdf/', views.download_medical_record_pdf, name='generate_pdf'),
+
 ]

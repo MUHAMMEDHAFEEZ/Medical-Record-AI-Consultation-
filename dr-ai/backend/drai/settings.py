@@ -184,3 +184,5 @@ ADMIN_INTERFACE_THEME_SETTINGS = {
     'form_submit_sticky': True,
     'form_pagination_sticky': True,
 }
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

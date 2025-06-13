@@ -6,6 +6,10 @@ from reportlab.lib.units import inch
 import io
 from datetime import datetime
 
+from fpdf import FPDF
+import os
+from django.conf import settings
+
 def generate_medical_record_pdf(medical_record):
     buffer = io.BytesIO()
     doc = SimpleDocTemplate(buffer, pagesize=letter)
@@ -85,3 +89,24 @@ def generate_consultation_pdf(consultation):
     doc.build(story)
     buffer.seek(0)
     return buffer
+
+
+def generate_medical_record_pdf(record):
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.set_font("Arial", size=12)
+
+    pdf.cell(200, 10, txt="Medical Record", ln=True, align='C')
+    pdf.ln(10)
+    pdf.cell(200, 10, txt=f"Name: {record.full_name}", ln=True)
+    pdf.cell(200, 10, txt=f"Blood Type: {record.blood_type}", ln=True)
+    pdf.cell(200, 10, txt=f"Allergies: {record.allergies}", ln=True)
+    pdf.cell(200, 10, txt=f"Chronic Conditions: {record.chronic_conditions}", ln=True)
+    pdf.cell(200, 10, txt=f"Medications: {record.medications}", ln=True)
+
+    folder = os.path.join(settings.MEDIA_ROOT, "pdfs")
+    os.makedirs(folder, exist_ok=True)
+
+    file_path = os.path.join(folder, f"medical_record_{record.nfc_id}.pdf")
+    pdf.output(file_path)
+    return file_path

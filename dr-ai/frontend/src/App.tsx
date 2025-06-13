@@ -4,6 +4,8 @@ import MedicalRecord from './components/MedicalRecord';
 // import PublicRecord from './components/PublicRecord';
 import PrivateRoute from './components/PrivateRoute';
 import './App.css';
+import DownloadRecord from './components/DownloadRecord';
+
 
 function App() {
   return (
@@ -20,9 +22,14 @@ function App() {
         />
         <Route path="/record/:id" element={<MedicalRecord />} />
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        <Route path="/record/:id" element={<MedicalRecord />} />
+        <Route path="/downloadrecord/:id" element={<DownloadRecord />} />
       </Routes>
     </Router>
   );
 }
 
 export default App;
+
+
+
