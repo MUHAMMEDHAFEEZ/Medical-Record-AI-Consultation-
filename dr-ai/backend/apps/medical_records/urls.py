@@ -17,7 +17,7 @@ urlpatterns = [
     ), name='consultation_pdf'),
     # path('record/<str:nfc_id>/generate-pdf/', views.download_medical_record_pdf, name='generate_pdf'),
     path('record/<str:nfc_id>/generate-pdf/', views.download_medical_record_pdf, name='generate_pdf'),
-    
+    path('consultation/<uuid:consultation_id>/pdf/', views.download_consultation_pdf, name='consultation_pdf'),
 
 
 ]

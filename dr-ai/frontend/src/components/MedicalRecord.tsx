@@ -18,6 +18,7 @@ interface MedicalRecord {
 }
 
 interface ConsultationResult {
+   id: string;
   diagnosis: string;
   treatment_plan: string;
   timestamp?: string;
@@ -58,6 +59,7 @@ export default function MedicalRecord() {
       setError('');
       const result = await medicalRecords.submitAIConsultation(record.nfc_id, aiConsult.question);
       setConsultationResult({
+         id: result.id,
         diagnosis: result.diagnosis,
         treatment_plan: result.treatment_plan,
         timestamp: new Date().toLocaleString(),
@@ -86,23 +88,44 @@ export default function MedicalRecord() {
     }
   };
 
+  // const handleDownloadConsultationPDF = () => {
+  //   if (!record || !consultationResult) return setError('No consultation data available');
+  //   try {
+  //     const success = generateConsultationPDF({
+  //       patientName: record.full_name,
+  //       dateOfBirth: record.date_of_birth,
+  //       question: aiConsult.question,
+  //       diagnosis: consultationResult.diagnosis,
+  //       treatment_plan: consultationResult.treatment_plan,
+  //       timestamp: consultationResult.timestamp
+  //     });
+  //     if (!success) throw new Error('Failed to generate consultation PDF');
+  //   } catch (err) {
+  //     console.error('Consultation PDF Generation Error:', err);
+  //     setError('Failed to generate consultation PDF. Please try again.');
+  //   }
+  // };
   const handleDownloadConsultationPDF = () => {
-    if (!record || !consultationResult) return setError('No consultation data available');
-    try {
-      const success = generateConsultationPDF({
-        patientName: record.full_name,
-        dateOfBirth: record.date_of_birth,
-        question: aiConsult.question,
-        diagnosis: consultationResult.diagnosis,
-        treatment_plan: consultationResult.treatment_plan,
-        timestamp: consultationResult.timestamp
-      });
-      if (!success) throw new Error('Failed to generate consultation PDF');
-    } catch (err) {
-      console.error('Consultation PDF Generation Error:', err);
-      setError('Failed to generate consultation PDF. Please try again.');
-    }
-  }; if (loading) return (
+  if (!record || !consultationResult) return setError('No consultation data available');
+  
+  try {
+    // إنشاء رابط تنزيل PDF نتيجة الاستشارة
+    const pdfUrl = `https://rj8vq174-8000.uks1.devtunnels.ms/api/medical-records/consultation/${consultationResult.id}/pdf/`;
+
+    const link = document.createElement('a');
+    link.href = pdfUrl;
+    link.download = `consultation-${record.full_name.replace(/\s+/g, '-')}.pdf`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  } catch (err) {
+    console.error('Consultation PDF Download Error:', err);
+    setError('Failed to download consultation PDF. Please try again.');
+  }
+};
+  
+  
+  if (loading) return (
     <div className="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center">
       <div className="text-center">
         <img
@@ -153,7 +176,7 @@ export default function MedicalRecord() {
       </div>
     </div>
   ); return (
-    <div className="min-h-screen bg-white rounded-2xl border">
+    <div className="min-h-screen bg-white rounded-[] border">
       <div className="w-full max-w-4xl mx-auto p-4 sm:p-6 lg:p-8">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4 mb-4 sm:mb-6 bg-green-50 p-3 sm:p-4 rounded-lg">
           <div className="flex items-center gap-2 sm:gap-3">

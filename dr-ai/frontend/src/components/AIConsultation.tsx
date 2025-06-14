@@ -1,15 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import { generateMedicalPDF } from '../utils/pdfGenerator';
+
+// تعريف واجهات البيانات محلياً
+interface MedicalRecord {
+  id: string;
+  nfc_id: string;
+  full_name: string;
+  date_of_birth: string;
+  medical_history: string;
+  blood_type: string;
+  allergies: string;
+  chronic_conditions: string;
+  medications: string;
+}
+
+interface ConsultationResult {
+  id: string;
+  diagnosis: string;
+  treatment_plan: string;
+  created_at: string;
+}
 
 interface AIConsultationProps {
   nfcId: string;
-  patientName: string;
-  medicalRecord: any;
+  medicalRecord: MedicalRecord;
 }
 
 const AIConsultation: React.FC<AIConsultationProps> = ({ nfcId, medicalRecord }) => {
   const [question, setQuestion] = useState('');
-  const [consultation, setConsultation] = useState<any>(null);
+  const [consultation, setConsultation] = useState<ConsultationResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -37,14 +55,28 @@ const AIConsultation: React.FC<AIConsultationProps> = ({ nfcId, medicalRecord })
 
       const data = await response.json();
       
-      // Clean up response data
-      const cleanedData = {
-        ...data,
-        diagnosis: data.diagnosis?.replace(/\(DIAGNOSIS\)|\(TREATMENT PLAN\)/g, '').trim(),
-        treatment_plan: data.treatment_plan?.replace(/\(DIAGNOSIS\)|\(TREATMENT PLAN\)/g, '').trim()
-      };
+      // Improved response handling with fallback
+      let diagnosis = data.diagnosis || '';
+      let treatmentPlan = data.treatment_plan || '';
       
-      setConsultation(cleanedData);
+      // Fallback if treatment plan is missing
+      if (!treatmentPlan) {
+        // Try to extract treatment plan from diagnosis
+        const treatmentMatch = diagnosis.match(/(TREATMENT PLAN:|Plan:)([\s\S]*)/i);
+        if (treatmentMatch) {
+          treatmentPlan = treatmentMatch[2].trim();
+          diagnosis = diagnosis.replace(treatmentMatch[0], '').trim();
+        } else {
+          treatmentPlan = 'Treatment plan not found. Please see diagnosis for full response.';
+        }
+      }
+      
+      setConsultation({
+        ...data,
+        diagnosis: diagnosis.replace(/\(DIAGNOSIS\)|\(TREATMENT PLAN\)/g, '').trim(),
+        treatment_plan: treatmentPlan.replace(/\(DIAGNOSIS\)|\(TREATMENT PLAN\)/g, '').trim()
+      });
+      
       setError('');
       
     } catch (err) {
@@ -55,36 +87,31 @@ const AIConsultation: React.FC<AIConsultationProps> = ({ nfcId, medicalRecord })
     }
   };
 
-  const handleDownloadPDF = () => {
-    if (!medicalRecord || !consultation) return;
+  // New function for server-side consultation PDF download
+  const handleDownloadConsultationPDF = () => {
+    if (!consultation || !consultation.id) {
+      setError('No consultation data available');
+      return;
+    }
 
     try {
-      const success = generateMedicalPDF({
-        patientName: medicalRecord.full_name,
-        dateOfBirth: medicalRecord.date_of_birth,
-        bloodType: medicalRecord.blood_type,
-        allergies: medicalRecord.allergies,
-        chronicConditions: medicalRecord.chronic_conditions,
-        medications: medicalRecord.medications,
-        medicalHistory: medicalRecord.medical_history,
-        consultation: {
-          question,
-          diagnosis: consultation.diagnosis,
-          treatment_plan: consultation.treatment_plan,
-          timestamp: new Date().toLocaleString()
-        }
-      });
-
-      if (!success) {
-        setError('Failed to generate PDF. Please try again.');
-      }
+      // Use consultation.id from backend
+      const pdfUrl = `http://localhost:8000/api/medical-records/consultation/${consultation.id}/pdf/`;
+      
+      const link = document.createElement('a');
+      link.href = pdfUrl;
+      link.download = `consultation_${consultation.id}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
     } catch (err) {
-      console.error('PDF Generation Error:', err);
-      setError('Failed to generate PDF. Please try again.');
+      console.error('PDF Download Error:', err);
+      setError('Failed to download PDF. Please try again.');
     }
   };
 
-  // Add new function for medical record download
+  // Function for medical record download
   const handleDownloadMedicalRecord = async () => {
     if (!medicalRecord) {
       setError('No medical record data available');
@@ -93,36 +120,29 @@ const AIConsultation: React.FC<AIConsultationProps> = ({ nfcId, medicalRecord })
 
     try {
       setError('');
-      console.log('Starting PDF generation...');
-
-      const success = await generateMedicalPDF({
-        patientName: medicalRecord.full_name,
-        dateOfBirth: medicalRecord.date_of_birth,
-        bloodType: medicalRecord.blood_type,
-        allergies: medicalRecord.allergies || 'None',
-        chronicConditions: medicalRecord.chronic_conditions || 'None',
-        medications: medicalRecord.medications || 'No current medications',
-        medicalHistory: medicalRecord.medical_history || 'No medical history'
-      });
-
-      if (!success) {
-        throw new Error('PDF generation failed');
-      }
-
+      const pdfUrl = `http://localhost:8000/api/medical-records/record/${medicalRecord.nfc_id}/generate-pdf/`;
+      
+      const link = document.createElement('a');
+      link.href = pdfUrl;
+      link.download = `medical_record_${medicalRecord.nfc_id}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
     } catch (err) {
-      console.error('PDF Generation Error:', err);
-      setError('Failed to generate PDF. Please try again.');
+      console.error('PDF Download Error:', err);
+      setError('Failed to download PDF. Please try again.');
     }
   };
 
-  // Add a timeout warning if response takes too long
+  // Timeout warning if response takes too long
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
     
     if (loading) {
       timeoutId = setTimeout(() => {
         setError('Response is taking longer than expected. Please wait...');
-      }, 10000); // Show message after 10 seconds
+      }, 10000);
     }
     
     return () => {
@@ -191,7 +211,7 @@ const AIConsultation: React.FC<AIConsultationProps> = ({ nfcId, medicalRecord })
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-xl font-bold text-gray-800">AI Consultation Response</h3>
             <button
-              onClick={handleDownloadPDF}
+              onClick={handleDownloadConsultationPDF}
               className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md transition-colors flex items-center gap-2"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -202,15 +222,28 @@ const AIConsultation: React.FC<AIConsultationProps> = ({ nfcId, medicalRecord })
           </div>
 
           {/* Diagnosis Section */}
-          <div className="bg-gray-50 p-4 rounded-lg mb-4">
-            <h4 className="text-lg font-semibold text-gray-800 mb-2">Diagnosis:</h4>
+          <div className="bg-blue-50 p-4 rounded-lg mb-4 border border-blue-100">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="bg-blue-500 text-white rounded-full p-1">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+              </div>
+              <h4 className="text-lg font-semibold text-blue-800">Diagnosis:</h4>
+            </div>
             <p className="text-gray-700 whitespace-pre-wrap">{consultation.diagnosis}</p>
-        
           </div>
 
           {/* Treatment Plan Section */}
-          <div className="bg-gray-50 p-4 rounded-lg">
-            <h4 className="text-lg font-semibold text-gray-800 mb-2">Treatment Plan:</h4>
+          <div className="bg-green-50 p-4 rounded-lg border border-green-100">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="bg-green-500 text-white rounded-full p-1">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                </svg>
+              </div>
+              <h4 className="text-lg font-semibold text-green-800">Treatment Plan:</h4>
+            </div>
             <p className="text-gray-700 whitespace-pre-wrap">{consultation.treatment_plan}</p>
           </div>
 

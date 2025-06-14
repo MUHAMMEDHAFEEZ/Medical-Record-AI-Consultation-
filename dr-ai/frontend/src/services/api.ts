@@ -86,7 +86,7 @@ export const medicalRecords = {
 
     getConsultationPDF: (consultationId: string) => 
         `${API_BASE_URL}/medical-records/consultation/${consultationId}/pdf/`,
-        
+        //
     getMedicalRecordByNFC: async (nfcId: string) => {
         try {
             const response = await fetch(`${API_BASE_URL}/medical-records/record/${nfcId}/`);
@@ -103,6 +103,3 @@ export const medicalRecords = {
         }
     }
 };
-
-
-

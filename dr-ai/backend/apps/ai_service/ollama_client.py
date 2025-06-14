@@ -1,5 +1,4 @@
-import requests
-import json
+import re
 from typing import Dict, Any
 from langchain_community.llms import Ollama
 from langchain.prompts import PromptTemplate
@@ -12,43 +11,82 @@ class OllamaClient:
         self.ollama = Ollama(
             base_url=base_url,
             model="medllama2",
-            temperature=0.1,
-            num_ctx=2048,  # Increase context window
-            repeat_penalty=1.1,  # Prevent repetition
-            num_predict=512,  # Limit response length
-            system="You are a medical AI assistant. Always respond with DIAGNOSIS: followed by diagnosis and TREATMENT PLAN: followed by treatment. No other text."
+            temperature=0.05,
+            num_ctx=4096,
+            top_k=40,
+            top_p=0.9,
+            repeat_penalty=1.2,
+            num_predict=1024,
+            system="""You are a chief medical specialist with 20+ years of experience. 
+Provide authoritative diagnoses and evidence-based treatment plans. 
+Structure responses EXACTLY as:
+
+DIAGNOSIS:
+[detailed analysis]
+
+TREATMENT PLAN:
+[step-by-step protocol]
+
+CRITICAL FORMATTING RULES:
+1. DIAGNOSIS and TREATMENT PLAN must be standalone section headers in ALL CAPS
+2. NEVER combine diagnosis and treatment in the same section
+3. ALWAYS start DIAGNOSIS section on a new line
+4. ALWAYS start TREATMENT PLAN section on a new line after diagnosis
+5. Use ONLY these exact headers: "DIAGNOSIS:" and "TREATMENT PLAN:"
+6. NEVER include these headers within sentences
+7. Treatment plan MUST include numbered steps
+8. NEVER include placeholders like [Your signature]
+9. NEVER include your name or credentials
+10. Provide ONLY clinical content"""
         )
-        logger.info(f"Initialized Ollama client with model: medllama2")
+        logger.info(f"Initialized enhanced medical specialist client with model: medllama2")
         
         self.prompt_template = PromptTemplate(
-            template="""Analyze this medical record and question. Respond ONLY using this exact format with these exact headings:
-
-Medical Record:
-- Patient: {full_name}
-- DOB: {date_of_birth}
-- Blood Type: {blood_type}
+            template="""**Medical Analysis Request**
+Patient: {full_name} | DOB: {date_of_birth} | Blood: {blood_type}
+**Critical Alerts**: 
 - Allergies: {allergies}
 - Chronic Conditions: {chronic_conditions}
 - Current Medications: {medications}
-- Medical History: {medical_history}
 
-Question: {question}
+**Clinical History**:
+{medical_history}
 
+**Consultation Query**: {question}
+
+**Required Output Format**:
 DIAGNOSIS:
-<provide detailed diagnosis based on medical history and current symptoms>
+[Your clinical assessment including: 
+- Pathophysiology mechanism 
+- Diagnostic criteria met 
+- Differential diagnosis 
+- ICD-11 code]
 
 TREATMENT PLAN:
-<provide comprehensive treatment plan including medications, lifestyle changes, and follow-up recommendations>
+[Your prescribed actions:
+1. Primary pharmacotherapy (drug class, dose, frequency)
+2. Adjuvant therapies 
+3. Lifestyle modifications
+4. Monitoring parameters 
+5. Red flags requiring immediate attention]
 
-Do not include any other text or sections. Start directly with DIAGNOSIS:""",
+**STRICT FORMAT REQUIREMENTS**:
+- Start DIAGNOSIS section on new line
+- Start TREATMENT PLAN section on new line after diagnosis
+- Use EXACT section headers: "DIAGNOSIS:" and "TREATMENT PLAN:" in ALL CAPS
+- Never include section headers in middle of sentences
+- Do NOT include placeholders like [Your signature]
+- Do NOT include your name or credentials
+- Provide ONLY clinical content""",
             input_variables=["full_name", "date_of_birth", "blood_type", "allergies", 
                            "chronic_conditions", "medications", "medical_history", "question"]
         )
 
     def generate_medical_response(self, medical_record: Dict[str, Any], question: str) -> Dict[str, str]:
         try:
-            logger.info(f"Generating response for patient: {medical_record['full_name']}")
-            logger.info(f"Question: {question}")
+            logger.info(f"Consultation for {medical_record['full_name']} | DOB: {medical_record['date_of_birth']}")
+            logger.info(f"Clinical Query: '{question}'")
+            logger.debug(f"Medical Context:\nAllergies: {medical_record['allergies']}\nMedications: {medical_record['medications']}")
             
             prompt = self.prompt_template.format(
                 full_name=medical_record['full_name'],
@@ -61,44 +99,125 @@ Do not include any other text or sections. Start directly with DIAGNOSIS:""",
                 question=question
             )
             
-            logger.debug(f"Generated prompt:\n{prompt}")
+            logger.debug(f"Generated clinical prompt:\n{prompt}")
             
             response = self.ollama.invoke(prompt)
-            logger.debug(f"Raw AI Response:\n{response}")
+            logger.debug(f"Raw Specialist Response:\n{response}")
             
             parsed_response = self._parse_medical_response(response)
-            logger.info("Successfully generated and parsed AI response")
+            logger.info("Successfully generated specialist-level response")
             
             return parsed_response
             
         except Exception as e:
-            logger.error(f"Error generating response: {str(e)}", exc_info=True)
+            logger.error(f"Consultation error: {str(e)}", exc_info=True)
             raise
 
     def _parse_medical_response(self, response: str) -> Dict[str, str]:
         try:
-            # Remove any parenthetical text
-            response = response.replace("(DIAGNOSIS)", "").replace("(TREATMENT PLAN)", "")
+            # Clean unwanted patterns before parsing
+            response = re.sub(
+                r'\[Your\s*(signature|name|credentials?)\]\s*', 
+                '', 
+                response, 
+                flags=re.IGNORECASE
+            )
             
-            # Split on exact headings
-            parts = response.split("TREATMENT PLAN:")
-            if len(parts) != 2:
-                raise ValueError("Missing TREATMENT PLAN section")
+            # Remove trailing condition names like "GERD" at the end
+            response = re.sub(
+                r'[\n\s]+[A-Z]+\s*$', 
+                '', 
+                response
+            )
             
-            diagnosis_parts = parts[0].split("DIAGNOSIS:")
-            if len(diagnosis_parts) != 2:
-                raise ValueError("Missing DIAGNOSIS section")
+            # Normalize section headers
+            normalized_response = re.sub(
+                r'(?i)(\bdifferential\s*)?diagnosis\s*[:]?', 
+                'DIAGNOSIS:', 
+                response
+            )
+            normalized_response = re.sub(
+                r'(?i)treatment\s*plan\s*[:]?', 
+                'TREATMENT PLAN:', 
+                normalized_response
+            )
             
-            return {
-                "diagnosis": diagnosis_parts[1].strip(),
-                "treatment_plan": parts[1].strip()
+            # Split into sections using standardized headers
+            sections = re.split(
+                r'(?i)(DIAGNOSIS:|TREATMENT PLAN:)', 
+                normalized_response
+            )
+            
+            # Find positions of section headers
+            diagnosis_pos = None
+            treatment_pos = None
+            
+            for idx, section in enumerate(sections):
+                if section.upper() == "DIAGNOSIS:":
+                    diagnosis_pos = idx
+                elif section.upper() == "TREATMENT PLAN:":
+                    treatment_pos = idx
+            
+            # Validate section positions
+            if diagnosis_pos is None:
+                raise ValueError("DIAGNOSIS section header not found")
+            if treatment_pos is None:
+                raise ValueError("TREATMENT PLAN section header not found")
+            if treatment_pos <= diagnosis_pos:
+                raise ValueError("TREATMENT PLAN appears before DIAGNOSIS")
+            
+            # Extract diagnosis content
+            diagnosis_content = ''.join(sections[diagnosis_pos+1:treatment_pos]).strip()
+            
+            # Extract treatment content
+            treatment_content = ''.join(sections[treatment_pos+1:]).strip()
+            
+            # Extract ICD code if present
+            icd_match = re.search(r"ICD-11:\s*([A-Z0-9\.]+)", response, re.IGNORECASE)
+            icd_code = icd_match.group(1).strip() if icd_match else None
+            
+            # Additional cleaning of diagnosis content
+            diagnosis_content = re.sub(
+                r'Thank you for providing the patient\'s details\.?\s*', 
+                '', 
+                diagnosis_content, 
+                flags=re.IGNORECASE
+            )
+            
+            # Build result
+            result = {
+                "diagnosis": diagnosis_content,
+                "treatment_plan": treatment_content
             }
             
+            if icd_code:
+                result["icd_code"] = icd_code
+                
+            return result
+            
         except Exception as e:
-            logger.error(f"Parse error: {str(e)}")
-            logger.debug(f"Raw response:\n{response}")
-            # Return the entire response as diagnosis if parsing fails
+            logger.error(f"Enhanced parsing failed: {str(e)}")
+            
+            # Fallback 1: Try to extract treatment content using different patterns
+            treatment_patterns = [
+                r'TREATMENT PLAN:\s*(.*?)(?=\n\s*[A-Z]+:|\Z)',
+                r'MANAGEMENT:\s*(.*?)(?=\n\s*[A-Z]+:|\Z)',
+                r'RECOMMENDATIONS:\s*(.*?)(?=\n\s*[A-Z]+:|\Z)',
+                r'PLAN:\s*(.*?)(?=\n\s*[A-Z]+:|\Z)'
+            ]
+            
+            for pattern in treatment_patterns:
+                treatment_match = re.search(pattern, response, re.IGNORECASE | re.DOTALL)
+                if treatment_match:
+                    treatment_content = treatment_match.group(1).strip()
+                    diagnosis_content = response.replace(treatment_match.group(0), '').strip()
+                    return {
+                        "diagnosis": diagnosis_content,
+                        "treatment_plan": treatment_content
+                    }
+            
+            # Fallback 2: If all else fails, return entire response as diagnosis
             return {
                 "diagnosis": response.strip(),
-                "treatment_plan": "See diagnosis section for complete response."
+                "treatment_plan": "See diagnosis section for complete clinical assessment"
             }
