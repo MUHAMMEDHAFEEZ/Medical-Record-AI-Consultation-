@@ -163,13 +163,13 @@ class Command(BaseCommand):
     help = 'Creates one sample user with a specific NFC ID (ADE4987D)'
 
     def handle(self, *args, **kwargs):
-        username = "Mohammed abu baker hafeez"
+        username = "Mahmoud_mohammed"
         password = "hafeez123"
-        email = "Mohammedabubakerhafeez@example.com"
-        nfc_id = "07afa6a4-621f-4d9f-94c3-c3313599d258"
+        email = "Mahmoud_mohammed@example.com"
+        nfc_id = "0DD7C979"
 
         medical_data = {
-            "full_name": "Mohammed Hafeez",
+            "full_name": "Mahmoud_mohammed",
             "date_of_birth": "2003-09-16",
             "blood_type": "O-",
             "allergies": "Penicillin, Dust",
