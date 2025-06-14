@@ -62,10 +62,8 @@ export const medicalRecords = {
             console.error('Error fetching public record:', error);
             throw error;
         }
-    },
-
-    getMedicalRecordPDF: (nfcId: string) => 
-        `${API_BASE_URL}/medical-records/record/${nfcId}/pdf/`,
+    },    getMedicalRecordPDF: (nfcId: string) => 
+        `${API_BASE_URL}/medical-records/record/${nfcId}/generate-pdf/`,
 
     submitAIConsultation: async (nfcId: string, question: string) => {
         try {

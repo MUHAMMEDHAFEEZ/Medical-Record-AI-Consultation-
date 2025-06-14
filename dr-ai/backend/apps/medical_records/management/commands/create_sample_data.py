@@ -163,25 +163,34 @@ class Command(BaseCommand):
     help = 'Creates one sample user with a specific NFC ID (ADE4987D)'
 
     def handle(self, *args, **kwargs):
-        username = "patientx"
-        password = "patient123"
-        email = "patientx@example.com"
-        nfc_id = "ADE4987D"
+        username = "Mohammed abu baker hafeez"
+        password = "hafeez123"
+        email = "Mohammedabubakerhafeez@example.com"
+        nfc_id = "07afa6a4-621f-4d9f-94c3-c3313599d258"
 
         medical_data = {
-            "full_name": "Ahmed Mohamed",
-            "date_of_birth": "1985-03-15",
-            "blood_type": "A+",
+            "full_name": "Mohammed Hafeez",
+            "date_of_birth": "2003-09-16",
+            "blood_type": "O-",
             "allergies": "Penicillin, Dust",
             "chronic_conditions": "Type 2 Diabetes, Hypertension",
             "medications": """- Metformin 500mg twice daily
 - Lisinopril 10mg once daily
 - Aspirin 81mg once daily""",
-            "medical_history": """2020: Diagnosed with Type 2 Diabetes
+            "medical_history": """2024: Annual checkup showed improved HbA1c levels (6.2%)
+2023: Started Vitamin D supplementation after blood test revealed deficiency
+2022: Emergency visit for hypoglycemia episode - resolved with glucose administration
+2021: Ophthalmology exam - no signs of diabetic retinopathy
+2020: Diagnosed with Type 2 Diabetes
+2019: Diagnosed with Hyperlipidemia, started Atorvastatin 20mg daily
 2018: Hypertension diagnosis
+2017: Treated for bacterial pneumonia (10-day antibiotics course)
 2015: Appendectomy
+2013: Diagnosed with GERD, advised dietary modifications
 2010: Fractured right ankle
-Regular checkups show stable blood pressure and improving blood sugar levels."""
+2008: Tonsillectomy
+Regular checkups show stable blood pressure and improving blood sugar levels.
+Patient maintains regular exercise regimen and follows diabetic diet."""
         }
 
         try:
@@ -203,7 +212,7 @@ Regular checkups show stable blood pressure and improving blood sugar levels."""
                         f"\n👤 Patient: {medical_record.full_name}"
                         f"\n🔐 Username: {user.username}"
                         f"\n🧬 NFC ID: {medical_record.nfc_id}"
-                        f"\n🔗 Access URL: http://localhost:5174/record/{medical_record.nfc_id}\n"
+                        f"\n🔗 Access URL: http://localhost:5173/record/{medical_record.nfc_id}\n"
                     )
                 )
             else:

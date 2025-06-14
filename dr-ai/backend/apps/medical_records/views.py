@@ -131,6 +131,20 @@ def download_medical_record_pdf(request, nfc_id):
     try:
         record = MedicalRecord.objects.get(nfc_id=nfc_id)
         
+        # ===== START: MEDICAL HISTORY CONVERSION =====
+        # Handle different medical history formats
+        if record.medical_history:
+            if isinstance(record.medical_history, str):
+                # Convert text to list of entries
+                history_list = [line.strip() for line in record.medical_history.split('\n') if line.strip()]
+            elif isinstance(record.medical_history, list):
+                history_list = record.medical_history
+            else:
+                history_list = ["Invalid medical history format"]
+        else:
+            history_list = ["No significant medical history recorded."]
+        # ===== END: MEDICAL HISTORY CONVERSION =====
+        
         # إعداد PDF مؤقت
         temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".pdf")
         c = canvas.Canvas(temp_file.name, pagesize=A4)
@@ -258,15 +272,14 @@ def download_medical_record_pdf(request, nfc_id):
         # تحديث موضع المؤشر بعد البطاقة
         y_position = current_y - 10
         
-        # الأقسام الطبية الأربعة
+        # ===== UPDATED MEDICAL SECTIONS =====
         medical_sections = [
             {
                 "title": "Medical Info",
                 "icon": "",
                 "content": [
-                    # استخدام تنسيق مدمج للمعلومات الطبية
                     ["", f"Allergies: {record.allergies or 'None'}"],
-                    ["", f"Chronic Conditions:{record.chronic_conditions or 'None'}"]
+                    ["", f"Chronic Conditions: {record.chronic_conditions or 'None'}"]
                 ]
             },
             {
@@ -276,18 +289,16 @@ def download_medical_record_pdf(request, nfc_id):
                     ["", record.medications or "No current medications"]
                 ]
             },
+            # Dynamic Medical History Section
             {
                 "title": "Medical History",
                 "icon": "",
                 "content": [
-                    ["", "2020: Diagnosed with Type 2 Diabetes"],
-                    ["", "2018: Hypertension diagnosis"],
-                    ["", "2015: Appendectomy"],
-                    ["", "2010: Fractured right ankle"],
-                    ["", "Regular checkups show stable blood pressure and improving blood sugar levels."]
+                    ["", entry] for entry in history_list
                 ]
             }
         ]
+        # ===== END UPDATED SECTION =====
         
         # رسم الأقسام الطبية
         for section in medical_sections:
@@ -389,6 +400,3 @@ def download_medical_record_pdf(request, nfc_id):
         raise Http404("Medical record not found")
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-
-

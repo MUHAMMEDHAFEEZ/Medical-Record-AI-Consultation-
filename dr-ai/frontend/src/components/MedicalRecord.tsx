@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { medicalRecords } from '../services/api';
-import { generateMedicalPDF, generateConsultationPDF } from '../utils/pdfGenerator';
+import { generateConsultationPDF } from '../utils/pdfGenerator';
 import logo from '../assets/logo (2).png';
 
 interface MedicalRecord {
   id: string;
   nfc_id: string;
-  full_name: string;  
+  full_name: string;
   date_of_birth: string;
   medical_history: string;
   created_at: string;
@@ -69,23 +69,20 @@ export default function MedicalRecord() {
       setIsLoading(false);
     }
   };
-
   const handleDownloadPDF = () => {
     if (!record) return setError('No medical record data available');
     try {
-      const success = generateMedicalPDF({
-        patientName: record.full_name,
-        dateOfBirth: record.date_of_birth,
-        bloodType: record.blood_type,
-        allergies: record.allergies,
-        chronicConditions: record.chronic_conditions,
-        medications: record.medications,
-        medicalHistory: record.medical_history
-      });
-      if (!success) throw new Error('Failed to generate PDF');
+      const pdfUrl = medicalRecords.getMedicalRecordPDF(record.nfc_id);
+
+      const link = document.createElement('a');
+      link.href = pdfUrl;
+      link.download = `medical-record-${record.full_name.replace(/\s+/g, '-')}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     } catch (err) {
-      console.error('PDF Generation Error:', err);
-      setError('Failed to generate PDF. Please try again.');
+      console.error('PDF Download Error:', err);
+      setError('Failed to download PDF. Please try again.');
     }
   };
 
@@ -105,18 +102,18 @@ export default function MedicalRecord() {
       console.error('Consultation PDF Generation Error:', err);
       setError('Failed to generate consultation PDF. Please try again.');
     }
-  };  if (loading) return (
+  }; if (loading) return (
     <div className="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center">
       <div className="text-center">
-        <img 
-          src={logo} 
-          alt="DR AI Logo" 
-          className="h-12 sm:h-16 w-auto mx-auto mb-4" 
+        <img
+          src={logo}
+          alt="DR AI Logo"
+          className="h-12 sm:h-16 w-auto mx-auto mb-4"
         />
         <div className="flex items-center justify-center gap-2 mb-3">
           <div className="w-2 h-2 bg-green-600 rounded-full animate-bounce"></div>
-          <div className="w-2 h-2 bg-green-600 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
-          <div className="w-2 h-2 bg-green-600 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+          <div className="w-2 h-2 bg-green-600 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+          <div className="w-2 h-2 bg-green-600 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
         </div>
         <p className="text-green-600 font-medium text-sm sm:text-base">Loading medical record...</p>
       </div>
@@ -133,8 +130,8 @@ export default function MedicalRecord() {
         </div>
         <h2 className="text-base sm:text-lg font-semibold text-green-600 mb-2">Unable to Load Record</h2>
         <p className="text-green-600 mb-4 text-sm sm:text-base">{error}</p>
-        <button 
-          onClick={() => window.location.reload()} 
+        <button
+          onClick={() => window.location.reload()}
           className="bg-green-600 text-white px-4 sm:px-6 py-2 rounded-lg hover:bg-green-700 transition text-sm sm:text-base w-full sm:w-auto"
         >
           Try Again
@@ -144,7 +141,7 @@ export default function MedicalRecord() {
   );
 
   if (!record) return (
-    <div className="fixed inset-0 bg-gray-50 z-50 flex flex-col items-center justify-center p-4">
+    <div className="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center p-4">
       <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 text-center max-w-sm sm:max-w-md w-full">
         <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
           <svg className="w-6 h-6 sm:w-8 sm:h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -155,8 +152,8 @@ export default function MedicalRecord() {
         <p className="text-green-600 text-sm sm:text-base">The requested medical record could not be found.</p>
       </div>
     </div>
-  );  return (
-    <div className="min-h-screen bg-gray-50">
+  ); return (
+    <div className="min-h-screen bg-white rounded-2xl border">
       <div className="w-full max-w-4xl mx-auto p-4 sm:p-6 lg:p-8">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4 mb-4 sm:mb-6 bg-green-50 p-3 sm:p-4 rounded-lg">
           <div className="flex items-center gap-2 sm:gap-3">
@@ -168,7 +165,7 @@ export default function MedicalRecord() {
           >
             📄 Download PDF
           </button>
-        </div>        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 lg:gap-6 mb-4 sm:mb-6">
+        </div>        <div className=" grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 lg:gap-6 mb-4 sm:mb-6">
           <div className="bg-gray-50 p-3 sm:p-4 rounded-lg sm:rounded-xl">
             <h2 className="text-base sm:text-lg font-semibold mb-2">👤 Patient Information</h2>
             <div className="space-y-1 text-sm sm:text-base">
@@ -231,3 +228,6 @@ export default function MedicalRecord() {
     </div>
   );
 }
+
+
+// grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-6
