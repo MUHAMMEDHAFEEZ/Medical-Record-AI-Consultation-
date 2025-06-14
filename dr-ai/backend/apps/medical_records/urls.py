@@ -16,5 +16,8 @@ urlpatterns = [
         filename=f'consultation_{consultation_id}.pdf'
     ), name='consultation_pdf'),
     # path('record/<str:nfc_id>/generate-pdf/', views.download_medical_record_pdf, name='generate_pdf'),
+    path('record/<str:nfc_id>/generate-pdf/', views.download_medical_record_pdf, name='generate_pdf'),
+    
+
 
 ]

@@ -40,7 +40,7 @@ def public_medical_record(request, nfc_id):
         data = MedicalRecordSerializer(record).data
         
         # Add NFC URL to response
-        data['nfc_url'] = f"http://localhost:5174/record/{record.nfc_id}"
+        data['nfc_url'] = f"http://localhost:5173/record/{record.nfc_id}"
         
         return Response(data)
     except MedicalRecord.DoesNotExist:
@@ -109,20 +109,286 @@ def ai_consultation(request, nfc_id):
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
 
+from django.http import FileResponse, Http404
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+from .models import MedicalRecord
+from reportlab.lib.pagesizes import A4
+from reportlab.lib import colors
+from reportlab.pdfgen import canvas
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_JUSTIFY
+from reportlab.platypus import Paragraph
+from reportlab.lib.utils import ImageReader
+import tempfile
+from datetime import datetime
+import qrcode
+from io import BytesIO
+
 @api_view(['GET'])
-def get_nfc_url(request, patient_id):
-    """
-    Get NFC URL for a specific patient
-    """
+def download_medical_record_pdf(request, nfc_id):
     try:
-        record = get_object_or_404(MedicalRecord, id=patient_id)
-        return Response({
-            'nfc_id': str(record.nfc_id),
-            'nfc_url': f"http://localhost:5174/record/{record.nfc_id}",
-            'patient_name': record.full_name
-        })
-    except Exception as e:
-        return Response(
-            {'error': str(e)},
-            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        record = MedicalRecord.objects.get(nfc_id=nfc_id)
+        
+        # إعداد PDF مؤقت
+        temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".pdf")
+        c = canvas.Canvas(temp_file.name, pagesize=A4)
+        width, height = A4
+        
+        # الألوان الرئيسية
+        primary_color = colors.HexColor("#1bb76e")  # الأخضر العصري
+        secondary_color = colors.HexColor("#2c3e50")  # الأزرق الداكن
+        light_gray = colors.HexColor("#f5f7fa")     # الخلفية الرمادية الفاتحة
+        
+        # إنشاء أنماط النص
+        styles = getSampleStyleSheet()
+        styles.add(ParagraphStyle(
+            name='Header1',
+            fontName='Helvetica-Bold',
+            fontSize=22,
+            textColor=secondary_color,
+            spaceAfter=6,
+            alignment=TA_CENTER
+        ))
+        styles.add(ParagraphStyle(
+            name='Header2',
+            fontName='Helvetica-Bold',
+            fontSize=14,
+            textColor=primary_color,
+            spaceAfter=4
+        ))
+        styles.add(ParagraphStyle(
+            name='Body',
+            fontName='Helvetica',
+            fontSize=11,
+            textColor=secondary_color,
+            leading=13,
+            spaceAfter=4
+        ))
+        styles.add(ParagraphStyle(
+            name='Label',
+            fontName='Helvetica-Bold',
+            fontSize=10,
+            textColor=secondary_color,
+            leading=11
+        ))
+        styles.add(ParagraphStyle(
+            name='Value',
+            fontName='Helvetica',
+            fontSize=10,
+            textColor=colors.black,
+            leading=11
+        ))
+        styles.add(ParagraphStyle(
+            name='History',
+            fontName='Helvetica',
+            fontSize=10,
+            textColor=colors.black,
+            leading=12,
+            alignment=TA_JUSTIFY
+        ))
+        # نمط جديد للمعلومات الطبية المدمجة
+        styles.add(ParagraphStyle(
+            name='MedicalInfo',
+            fontName='Helvetica',
+            fontSize=11,
+            textColor=colors.black,
+            leading=14,
+            spaceAfter=4,
+            leftIndent=10
+        ))
+        
+        # رسم الخلفية التصميمية
+        c.setFillColor(light_gray)
+        c.rect(0, 0, width, height, fill=1, stroke=0)
+        
+        # الرأس - الجزء العلوي
+        header_height = 70
+        c.setFillColor(primary_color)
+        c.rect(0, height - header_height, width, header_height, fill=1, stroke=0)
+        
+        # شعار الرأس
+        c.setFillColor(colors.white)
+        c.setFont("Helvetica-Bold", 18)
+        c.drawCentredString(width/2, height - header_height + 25, "DR.AI Medical Record")
+        
+        # التاريخ
+        c.setFont("Helvetica", 9)
+        current_date = datetime.now().strftime("%Y-%m-%d %H:%M")
+        c.drawRightString(width - 15, height - 15, f"Generated: {current_date}")
+        
+        # محتوى الصفحة
+        y_position = height - header_height - 25
+        content_width = width - 30
+        
+        # قسم معلومات المريض
+        patient_info = [
+            ["Full Name:", record.full_name],
+            ["Date of Birth:", record.date_of_birth.strftime("%Y-%m-%d")],
+            ["NFC ID:", record.nfc_id],
+            ["Blood Type:", record.blood_type or "N/A"]
+        ]
+        
+        # رسم بطاقة معلومات المريض
+        card_height = len(patient_info) * 18 + 30
+        c.setFillColor(colors.white)
+        c.setStrokeColor(colors.lightgrey)
+        c.setLineWidth(0.3)
+        c.roundRect(15, y_position - card_height, content_width, card_height, 8, fill=1, stroke=1)
+        
+        # عنوان البطاقة
+        p = Paragraph("<b>Patient Information</b>", styles["Header2"])
+        p.wrapOn(c, content_width, 25)
+        p.drawOn(c, 25, y_position - 25)
+        
+        # محتوى البطاقة
+        current_y = y_position - 45
+        for label, value in patient_info:
+            p_label = Paragraph(label, styles["Label"])
+            p_label.wrapOn(c, 100, 15)
+            p_label.drawOn(c, 30, current_y)
+            
+            p_value = Paragraph(value, styles["Value"])
+            p_value.wrapOn(c, content_width - 130, 15)
+            p_value.drawOn(c, 130, current_y)
+            
+            current_y -= 18
+        
+        # تحديث موضع المؤشر بعد البطاقة
+        y_position = current_y - 10
+        
+        # الأقسام الطبية الأربعة
+        medical_sections = [
+            {
+                "title": "Medical Info",
+                "icon": "",
+                "content": [
+                    # استخدام تنسيق مدمج للمعلومات الطبية
+                    ["", f"Allergies: {record.allergies or 'None'}"],
+                    ["", f"Chronic Conditions:{record.chronic_conditions or 'None'}"]
+                ]
+            },
+            {
+                "title": "Current Medications",
+                "icon": "",
+                "content": [
+                    ["", record.medications or "No current medications"]
+                ]
+            },
+            {
+                "title": "Medical History",
+                "icon": "",
+                "content": [
+                    ["", "2020: Diagnosed with Type 2 Diabetes"],
+                    ["", "2018: Hypertension diagnosis"],
+                    ["", "2015: Appendectomy"],
+                    ["", "2010: Fractured right ankle"],
+                    ["", "Regular checkups show stable blood pressure and improving blood sugar levels."]
+                ]
+            }
+        ]
+        
+        # رسم الأقسام الطبية
+        for section in medical_sections:
+            # حساب ارتفاع القسم
+            section_height = len(section["content"]) * 20 + 30
+            
+            # التحقق من المساحة المتبقية في الصفحة
+            if y_position - section_height < 120:
+                c.showPage()
+                y_position = height - 30
+                c.setFillColor(light_gray)
+                c.rect(0, 0, width, height, fill=1, stroke=0)
+            
+            # رسم البطاقة
+            c.setFillColor(colors.white)
+            c.setStrokeColor(colors.lightgrey)
+            c.setLineWidth(0.3)
+            c.roundRect(15, y_position - section_height, content_width, section_height, 8, fill=1, stroke=1)
+            
+            # عنوان القسم
+            p = Paragraph(f"<b>{section['icon']} {section['title']}</b>", styles["Header2"])
+            p.wrapOn(c, content_width, 25)
+            p.drawOn(c, 25, y_position - 25)
+            
+            # محتوى القسم
+            current_y = y_position - 45
+            for item in section["content"]:
+                if item[0]:  # إذا كان هناك تسمية
+                    p_label = Paragraph(item[0], styles["Label"])
+                    p_label.wrapOn(c, 100, 15)
+                    p_label.drawOn(c, 30, current_y)
+                    
+                    p_value = Paragraph(item[1], styles["Value"])
+                    p_value.wrapOn(c, content_width - 130, 15)
+                    p_value.drawOn(c, 130, current_y)
+                else:
+                    # استخدام نمط خاص للمعلومات الطبية
+                    style = styles["MedicalInfo"] if section["title"] == "Medical Info" else styles["Body"]
+                    p_value = Paragraph(item[1], style)
+                    p_value.wrapOn(c, content_width - 50, 20)
+                    p_value.drawOn(c, 30, current_y)
+                
+                current_y -= 20
+            
+            # تحديث موضع المؤشر بعد البطاقة
+            y_position = current_y - 10
+        
+        # إنشاء رمز الاستجابة السريعة (QR Code) مع رابط URL
+        qr = qrcode.QRCode(
+            version=1,
+            error_correction=qrcode.constants.ERROR_CORRECT_L,
+            box_size=6,
+            border=4,
         )
+        
+        # إنشاء رابط URL مع nfc_id
+        frontend_url = f"https://rj8vq174-5173.uks1.devtunnels.ms/record/{record.nfc_id}"
+        qr.add_data(frontend_url)
+        qr.make(fit=True)
+        
+        # إنشاء صورة QR Code في الذاكرة
+        # تحويل كائن اللون إلى تنسيق HEX
+        secondary_hex = f"#{int(secondary_color.red * 255):02x}{int(secondary_color.green * 255):02x}{int(secondary_color.blue * 255):02x}"
+        qr_img = qr.make_image(fill_color=secondary_hex, back_color="white")
+        qr_img_bytes = BytesIO()
+        qr_img.save(qr_img_bytes, format='PNG')
+        qr_img_bytes.seek(0)  # العودة إلى بداية الـ stream
+        
+        # إضافة QR Code إلى PDF باستخدام ImageReader
+        qr_size = 50  # حجم الصورة
+        qr_x = 30
+        qr_y = 50
+        
+        # استخدام ImageReader لتحويل BytesIO إلى كائن صورة مناسب
+        img_reader = ImageReader(qr_img_bytes)
+        c.drawImage(img_reader, qr_x, qr_y, width=qr_size, height=qr_size)
+        
+        # إضافة نص تحت QR Code
+        c.setFillColor(primary_color)
+        c.setFont("Helvetica-Bold", 8)
+        c.drawString(qr_x, qr_y - 15, "Scan to view digital record")
+        
+        # التذييل
+        footer_height = 25
+        c.setFillColor(secondary_color)
+        c.rect(0, 0, width, footer_height, fill=1, stroke=0)
+        c.setFillColor(colors.whitesmoke)
+        c.setFont("Helvetica", 8)
+        c.drawCentredString(width/2, 8, "Confidential Medical Record • Generated by DR.AI System • © 2025 DR.AI")
+        
+        c.save()
+        return FileResponse(
+            open(temp_file.name, 'rb'), 
+            as_attachment=True, 
+            filename=f"medical_record_{nfc_id}.pdf"
+        )
+
+    except MedicalRecord.DoesNotExist:
+        raise Http404("Medical record not found")
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+
